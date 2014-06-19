@@ -30,10 +30,19 @@ class Interface(object):
         return self.construct(root, schema)
 
     def construct(self, node, schema):
+        if not schema:
+            raise ValueError('Missing schema for node with tag "%s"' % node.tag)
+
         item = schema.get(node.tag)
 
         if item is None:
-            raise ValueError('Unknown node with tag "%s"', node.tag)
+            raise ValueError('Unknown node with tag "%s"' % node.tag)
+
+        if type(item) is dict:
+            item = item.get(node.get('type'))
+
+            if item is None:
+                raise ValueError('Unknown node type "%s"' % node.get('type'))
 
         descriptor = None
         child_schema = None
