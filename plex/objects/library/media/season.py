@@ -1,10 +1,10 @@
 from plex.objects.base import Property
+from plex.objects.library.metadata import Metadata
 from plex.objects.library.video import Directory
 
 
-class Season(Directory):
+class Season(Directory, Metadata):
     index = Property
-    rating_key = Property('ratingKey')
 
     summary = Property
 
