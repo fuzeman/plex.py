@@ -14,6 +14,7 @@ if __name__ == '__main__':
     for item in container:
         if type(item) is Album:
             print '[Album]', item.title
+            print '\t[Artist]', item.artist.title
         elif type(item) is Movie:
             print '[Movie]', item.title
         elif type(item) is Season:

@@ -4,12 +4,20 @@ log = logging.getLogger(__name__)
 
 
 class Property(object):
-    def __init__(self, name=None, type=None):
+    def __init__(self, name=None, type=None, resolver=None):
         self.name = name
         self.type = type
+        self.resolver = resolver
 
-    def value(self, node):
-        value = node.get(self.name)
+    def value(self, key, node, keys_used):
+        if self.resolver is not None:
+            return self.value_func(node, keys_used)
+
+        return self.value_node(key, node, keys_used)
+
+    def value_node(self, key, node, keys_used):
+        value = node.get(key)
+        keys_used.append(key)
 
         if value is None:
             return None
@@ -22,6 +30,17 @@ class Property(object):
         try:
             return self.type(value)
         except:
+            return None
+
+    def value_func(self, node, keys_used):
+        try:
+            func = self.resolver()
+            keys, value = func(node)
+
+            keys_used.extend(keys)
+            return value
+        except Exception, ex:
+            log.warn(ex)
             return None
 
 
@@ -39,22 +58,32 @@ class Descriptor(object):
             if value is Property:
                 yield key, Property(key)
             elif isinstance(value, Property):
-                if value.name is None:
-                    value.name = key
-
                 yield key, value
 
 
     @classmethod
-    def construct(cls, node):
+    def construct(cls, node, attribute_map=None):
+        keys_available = attribute_map.keys() if attribute_map else node.keys()
+        keys_used = []
+
         obj = cls()
-        keys = []
 
         for key, prop in obj.properties():
-            setattr(obj, key, prop.value(node))
-            keys.append(prop.name)
+            node_key = prop.name or key
 
-        omitted = list(set(node.keys()) - set(keys))
+            if attribute_map:
+                if node_key not in attribute_map:
+                    setattr(obj, key, None)
+                    continue
+
+                node_key = attribute_map.get(key)
+
+            if key == 'title':
+                pass
+
+            setattr(obj, key, prop.value(node_key, node, keys_used))
+
+        omitted = list(set(keys_available) - set(keys_used))
         omitted.sort()
 
         if omitted:

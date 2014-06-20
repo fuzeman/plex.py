@@ -1,19 +1,27 @@
 from plex.objects.base import Property
 from plex.objects.directory import Directory
+from plex.objects.library.metadata import Metadata
+from plex.objects.library.media.artist import Artist
 
 
-class Album(Directory):
+class Album(Directory, Metadata):
+    artist = Property(resolver=lambda: Album.construct_artist)
+
     index = Property
-    rating_key = Property('ratingKey')
 
-    summary = Property
     year = Property(type=int)
-
     originally_available_at = Property('originallyAvailableAt')
 
-    leaf_count = Property('leafCount', int)
-    viewed_leaf_count = Property('viewedLeafCount', int)
+    track_count = Property('leafCount', int)
+    viewed_track_count = Property('viewedLeafCount', int)
 
-    added_at = Property('addedAt')
+    @staticmethod
+    def construct_artist(node):
+        attribute_map = {
+            'key': 'parentKey',
+            'ratingKey': 'parentRatingKey',
+            'thumb': 'parentThumb',
+            'title': 'parentTitle'
+        }
 
-    # TODO parent
+        return attribute_map.values(), Artist.construct(node, attribute_map)
