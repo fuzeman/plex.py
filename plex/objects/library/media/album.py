@@ -20,8 +20,9 @@ class Album(Directory, Metadata):
         attribute_map = {
             'key': 'parentKey',
             'ratingKey': 'parentRatingKey',
-            'thumb': 'parentThumb',
-            'title': 'parentTitle'
+
+            'title': 'parentTitle',
+            'thumb': 'parentThumb'
         }
 
         return attribute_map.values(), Artist.construct(node, attribute_map)

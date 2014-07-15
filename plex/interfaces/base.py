@@ -1,4 +1,5 @@
 from functools import wraps
+from urlparse import urlparse
 from lxml import etree
 import logging
 
@@ -7,6 +8,7 @@ log = logging.getLogger(__name__)
 
 class Interface(object):
     path = None
+    object_map = {}
 
     def __init__(self, client):
         self.client = client
@@ -27,9 +29,13 @@ class Interface(object):
     def parse(self, response, schema):
         root = etree.fromstring(response.content)
 
-        return self.construct(root, schema)
+        url = urlparse(response.url)
+        path = url.path
 
-    def construct(self, node, schema):
+        return self.__construct(self.client, path, root, schema)
+
+    @classmethod
+    def __construct(cls, client, path, node, schema):
         if not schema:
             raise ValueError('Missing schema for node with tag "%s"' % node.tag)
 
@@ -52,14 +58,18 @@ class Interface(object):
         else:
             descriptor = item
 
-        #print 'node: %s, descriptor: %s, child_schema: %s' % (node, descriptor, child_schema)
+        if isinstance(descriptor, (str, unicode)):
+            descriptor = cls.object_map.get(descriptor)
 
-        obj = descriptor.construct(node)
+        if descriptor is None:
+            raise Exception('Unable to find descriptor')
+
+        obj = descriptor.construct(client, path, node)
 
         # Lazy-construct children
         def iter_children():
             for child_node in node:
-                yield self.construct(child_node, child_schema)
+                yield cls.__construct(client, path, child_node, child_schema)
 
         obj._children = iter_children()
 

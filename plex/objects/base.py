@@ -1,4 +1,6 @@
+from plex.interfaces.base import Interface
 import logging
+import traceback
 
 log = logging.getLogger(__name__)
 
@@ -9,9 +11,9 @@ class Property(object):
         self.type = type
         self.resolver = resolver
 
-    def value(self, key, node, keys_used):
+    def value(self, client, key, node, keys_used):
         if self.resolver is not None:
-            return self.value_func(node, keys_used)
+            return self.value_func(client, node, keys_used)
 
         return self.value_node(key, node, keys_used)
 
@@ -32,20 +34,33 @@ class Property(object):
         except:
             return None
 
-    def value_func(self, node, keys_used):
+    def value_func(self, client, node, keys_used):
+        func = self.resolver()
+
         try:
-            func = self.resolver()
-            keys, value = func(node)
+            keys, value = func(client, node)
 
             keys_used.extend(keys)
             return value
         except Exception, ex:
-            log.warn(ex)
+            log.warn('Exception in value function (%s): %s - %s', func, ex, traceback.format_exc())
             return None
 
 
-class Descriptor(object):
-    def __init__(self):
+class DescriptorMeta(type):
+    def __init__(self, name, bases, attrs):
+        super(DescriptorMeta, self).__init__(name, bases, attrs)
+
+        Interface.object_map[self.__name__] = self
+
+
+class Descriptor(Interface):
+    __metaclass__ = DescriptorMeta
+
+    def __init__(self, client, path):
+        super(Descriptor, self).__init__(client)
+        self.path = path
+
         self._children = None
 
     def properties(self):
@@ -62,11 +77,11 @@ class Descriptor(object):
 
 
     @classmethod
-    def construct(cls, node, attribute_map=None):
-        keys_available = attribute_map.keys() if attribute_map else node.keys()
+    def construct(cls, client, path, node, attribute_map=None):
+        keys_available = attribute_map.values() if attribute_map else node.keys()
         keys_used = []
 
-        obj = cls()
+        obj = cls(client, path)
 
         for key, prop in obj.properties():
             node_key = prop.name or key
@@ -76,12 +91,12 @@ class Descriptor(object):
                     setattr(obj, key, None)
                     continue
 
-                node_key = attribute_map.get(key)
+                node_key = attribute_map.get(node_key)
 
             if key == 'title':
                 pass
 
-            setattr(obj, key, prop.value(node_key, node, keys_used))
+            setattr(obj, key, prop.value(client, node_key, node, keys_used))
 
         omitted = list(set(keys_available) - set(keys_used))
         omitted.sort()
