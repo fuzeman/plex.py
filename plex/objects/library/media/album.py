@@ -16,7 +16,7 @@ class Album(Directory, Metadata):
     viewed_track_count = Property('viewedLeafCount', int)
 
     @staticmethod
-    def construct_artist(node):
+    def construct_artist(client, node):
         attribute_map = {
             'key': 'parentKey',
             'ratingKey': 'parentRatingKey',
@@ -25,4 +25,4 @@ class Album(Directory, Metadata):
             'thumb': 'parentThumb'
         }
 
-        return attribute_map.values(), Artist.construct(node, attribute_map)
+        return attribute_map.values(), Artist.construct(client, node, attribute_map)
