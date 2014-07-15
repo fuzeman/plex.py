@@ -21,3 +21,27 @@ if __name__ == '__main__':
             print '[Season]', item.title
         else:
             print item
+
+    print '-' * 40
+
+    # Show
+    container = Plex['library'].metadata(1)
+
+    show = list(container)[0]
+
+    print '[Show] %s' % show.title
+
+    for season in show.children():
+        print '\t[Season] %s' % season.title
+
+
+    exit(0)
+
+
+
+
+    # Movie
+    container = Plex['library'].metadata(12)
+    item = list(container)[0]
+
+    print item.title
