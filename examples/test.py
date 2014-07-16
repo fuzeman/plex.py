@@ -8,7 +8,7 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 
-if __name__ == '__main__':
+def recently_added():
     container = Plex['library'].recently_added()
 
     for item in container:
@@ -18,30 +18,37 @@ if __name__ == '__main__':
         elif type(item) is Movie:
             print '[Movie]', item.title
         elif type(item) is Season:
-            print '[Season]', item.title
+            print '[Season][S%02d] %s' % (item.index, item.title)
         else:
             print item
 
-    print '-' * 40
 
-    # Show
+def metadata_show():
     container = Plex['library'].metadata(1)
-
     show = list(container)[0]
 
-    print '[Show] %s' % show.title
+    print '[Show] %s (rating_key: %s)' % (show.title, show.rating_key)
+
+    for episode in show.all_leaves():
+        print '\t\t[Episode][S%02dE%02d] %s (rating_key: %s)' % (episode.season.index, episode.index, episode.title, episode.rating_key)
 
     for season in show.children():
-        print '\t[Season] %s' % season.title
+        print '\t[Season][S%02d] %s (rating_key: %s)' % (season.index, season.title, season.rating_key)
+
+        for episode in season.children():
+            print '\t\t[Episode][S%02dE%02d] %s (rating_key: %s)' % (season.index, episode.index, episode.title, episode.rating_key)
 
 
-    exit(0)
-
-
-
-
-    # Movie
+def metadata_movie():
     container = Plex['library'].metadata(12)
-    item = list(container)[0]
+    movie = list(container)[0]
 
-    print item.title
+    print '[Movie] %s (rating_key: %s)' % (movie.title, movie.rating_key)
+
+
+if __name__ == '__main__':
+    recently_added()
+    print '-' * 50
+    metadata_show()
+    print '-' * 50
+    metadata_movie()

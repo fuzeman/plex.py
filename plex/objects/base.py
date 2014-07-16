@@ -57,6 +57,8 @@ class DescriptorMeta(type):
 class Descriptor(Interface):
     __metaclass__ = DescriptorMeta
 
+    attribute_map = None
+
     def __init__(self, client, path):
         super(Descriptor, self).__init__(client)
         self.path = path
@@ -64,7 +66,11 @@ class Descriptor(Interface):
         self._children = None
 
     def properties(self):
-        for key in dir(self):
+        keys = [k for k in dir(self) if not k.startswith('_')]
+
+        #log.debug('%s - keys: %s', self, keys)
+
+        for key in keys:
             if key.startswith('_'):
                 continue
 
@@ -77,32 +83,45 @@ class Descriptor(Interface):
 
 
     @classmethod
-    def construct(cls, client, path, node, attribute_map=None):
-        keys_available = attribute_map.values() if attribute_map else node.keys()
+    def construct(cls, client, node, attribute_map=None, path=None, child=False):
+        keys_available = node.keys()
         keys_used = []
 
+        if attribute_map is None:
+            attribute_map = cls.attribute_map or {}
+
+        require_map = attribute_map.get('*') != '*'
+
+        # Determine path from object "key"
+        key = node.get('key')
+
+        if key is not None:
+            path = key[:key.rfind('/')]
+
+        # Construct object
         obj = cls(client, path)
+
+        #log.debug('%s - Properties: %s', cls.__name__, list(obj.properties()))
 
         for key, prop in obj.properties():
             node_key = prop.name or key
 
             if attribute_map:
-                if node_key not in attribute_map:
+                if node_key in attribute_map:
+                    node_key = attribute_map.get(node_key)
+                elif require_map:
                     setattr(obj, key, None)
                     continue
 
-                node_key = attribute_map.get(node_key)
-
-            if key == 'title':
-                pass
-
+            #log.debug('%s - Found property "%s"', cls.__name__, key)
             setattr(obj, key, prop.value(client, node_key, node, keys_used))
 
+        # Look for omitted keys
         omitted = list(set(keys_available) - set(keys_used))
         omitted.sort()
 
-        if omitted:
-            log.warn('%s construction omitted attributes: %s', cls.__name__, ', '.join(omitted))
+        if omitted and not child:
+            log.warn('%s - Omitted attributes: %s', cls.__name__, ', '.join(omitted))
 
         return obj
 

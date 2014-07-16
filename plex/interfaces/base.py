@@ -64,7 +64,7 @@ class Interface(object):
         if descriptor is None:
             raise Exception('Unable to find descriptor')
 
-        obj = descriptor.construct(client, path, node)
+        obj = descriptor.construct(client, node, path=path)
 
         # Lazy-construct children
         def iter_children():

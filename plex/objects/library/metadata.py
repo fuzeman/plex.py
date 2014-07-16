@@ -1,5 +1,4 @@
 from plex.objects.base import Descriptor, Property
-from plex.objects.library.container import Container
 from plex.objects.library.section import Section
 
 
@@ -26,21 +25,6 @@ class Metadata(Descriptor):
     added_at = Property('addedAt')
     last_viewed_at = Property('lastViewedAt')
 
-    def children(self):
-        response = self.request('children')
-
-        return self.parse(response, {
-            'MediaContainer': (Container, {
-                'Directory': {
-                    'album': 'Album',
-                    'season': 'Season'
-                }
-            })
-        })
-
-    def all_leaves(self):
-        pass
-
     @staticmethod
     def construct_section(client, node):
         attribute_map = {
@@ -49,4 +33,4 @@ class Metadata(Descriptor):
             'title': 'librarySectionTitle'
         }
 
-        return attribute_map.values(), Section.construct(client, node, attribute_map)
+        return attribute_map.values(), Section.construct(client, node, attribute_map, child=True)

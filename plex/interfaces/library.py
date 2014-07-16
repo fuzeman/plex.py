@@ -1,11 +1,4 @@
 from plex.interfaces.base import Interface
-from plex.objects.library.container import Container
-from plex.objects.library.location import Location
-from plex.objects.library.media.album import Album
-from plex.objects.library.media.movie import Movie
-from plex.objects.library.media.season import Season
-from plex.objects.library.media.show import Show
-from plex.objects.library.section import Section
 
 
 class LibraryInterface(Interface):
@@ -15,14 +8,14 @@ class LibraryInterface(Interface):
         response = self.request('metadata', rating_key)
 
         return self.parse(response, {
-            'MediaContainer': (Container, {
+            'MediaContainer': ('Container', {
                 'Directory': {
-                    'album': Album,
-                    'season': Season,
-                    'show': Show
+                    'album':    'Album',
+                    'season':   'Season',
+                    'show':     'Show'
                 },
                 'Video': {
-                    'movie': Movie
+                    'movie':    'Movie'
                 }
             })
         })
@@ -34,13 +27,13 @@ class LibraryInterface(Interface):
         response = self.request('recentlyAdded')
 
         return self.parse(response, {
-            'MediaContainer': (Container, {
+            'MediaContainer': ('Container', {
                 'Directory': {
-                    'album': Album,
-                    'season': Season
+                    'album':    'Album',
+                    'season':   'Season'
                 },
                 'Video': {
-                    'movie': Movie
+                    'movie':    'Movie'
                 }
             })
         })
@@ -49,9 +42,9 @@ class LibraryInterface(Interface):
         response = self.request('sections')
 
         return self.parse(response, {
-            'MediaContainer': (Container, {
-                'Directory': (Section, {
-                    'Location': Location
+            'MediaContainer': ('Container', {
+                'Directory': ('Section', {
+                    'Location': 'Location'
                 })
             })
         })

@@ -1,5 +1,6 @@
 from plex.interfaces import construct_map
 from plex.interfaces.base import InterfaceProxy
+from plex.objects.manager import ObjectManager
 from plex.request import PlexRequest
 
 import logging
@@ -17,6 +18,9 @@ class PlexClient(object):
 
         # Construct interfaces
         self.interfaces = construct_map(self)
+
+        # Discover modules
+        ObjectManager.construct()
 
         # Private
         self._session = requests.Session()
