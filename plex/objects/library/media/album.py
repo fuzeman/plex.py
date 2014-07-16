@@ -25,4 +25,4 @@ class Album(Directory, Metadata):
             'thumb': 'parentThumb'
         }
 
-        return attribute_map.values(), Artist.construct(client, node, attribute_map, child=True)
+        return Artist.construct(client, node, attribute_map, child=True)

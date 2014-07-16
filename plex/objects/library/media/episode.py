@@ -23,7 +23,7 @@ class Episode(Video, Metadata):
             'title': 'grandparentTitle'
         }
 
-        return attribute_map.values(), Show.construct(client, node, attribute_map, child=True)
+        return Show.construct(client, node, attribute_map, child=True)
 
     @staticmethod
     def construct_season(client, node):
@@ -35,4 +35,4 @@ class Episode(Video, Metadata):
             'thumb':        'parentThumb'
         }
 
-        return attribute_map.values(), Season.construct(client, node, attribute_map, child=True)
+        return Season.construct(client, node, attribute_map, child=True)

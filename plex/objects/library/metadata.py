@@ -33,4 +33,4 @@ class Metadata(Descriptor):
             'title': 'librarySectionTitle'
         }
 
-        return attribute_map.values(), Section.construct(client, node, attribute_map, child=True)
+        return Section.construct(client, node, attribute_map, child=True)

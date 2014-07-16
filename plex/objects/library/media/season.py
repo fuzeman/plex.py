@@ -43,7 +43,7 @@ class Season(Directory, Metadata):
             'theme':     'parentTheme'
         }
 
-        return attribute_map.values(), Show.construct(client, node, attribute_map, child=True)
+        return Show.construct(client, node, attribute_map, child=True)
 
 
 class EpisodeContainer(MediaContainer, Season):
@@ -68,4 +68,4 @@ class EpisodeContainer(MediaContainer, Season):
             'theme':            'grandparentTheme'
         }
 
-        return attribute_map.values(), Show.construct(client, node, attribute_map, child=True)
+        return Show.construct(client, node, attribute_map, child=True)
