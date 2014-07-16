@@ -1,15 +1,18 @@
 from plex.interfaces.channel import ChannelInterface
 from plex.interfaces.library import LibraryInterface
 from plex.interfaces.root import RootInterface
+from plex.interfaces.status import StatusInterface
 
 
 # TODO automatic interface discovery
+
 INTERFACES = [
     RootInterface,
 
     # /
     ChannelInterface,
-    LibraryInterface
+    LibraryInterface,
+    StatusInterface
 ]
 
 
