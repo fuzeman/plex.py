@@ -1,9 +1,12 @@
 from plex.interfaces.channel import ChannelInterface
 from plex.interfaces.library import LibraryInterface
+from plex.interfaces.root import RootInterface
 
 
 # TODO automatic interface discovery
 INTERFACES = [
+    RootInterface,
+
     # /
     ChannelInterface,
     LibraryInterface
@@ -12,10 +15,10 @@ INTERFACES = [
 
 def get_interfaces():
     for interface in INTERFACES:
-        if not interface.path:
-            continue
-
-        path = interface.path.strip('/')
+        if interface.path:
+            path = interface.path.strip('/')
+        else:
+            path = ''
 
         if path:
             path = path.split('/')
@@ -33,10 +36,10 @@ def construct_map(client, d=None, interfaces=None):
         interfaces = get_interfaces()
 
     for path, interface in interfaces:
-        if len(path) == 0:
-            continue
-
-        key = path.pop(0)
+        if len(path) > 0:
+            key = path.pop(0)
+        else:
+            key = None
 
         if len(path) == 0:
             d[key] = interface(client)

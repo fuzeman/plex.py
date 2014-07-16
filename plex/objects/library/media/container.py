@@ -1,15 +1,15 @@
-from plex.objects.base import Descriptor, Property
+from plex.objects.base import Property
+from plex.objects.container import Container
 from plex.objects.library.section import Section
 
 
-class Container(Descriptor):
-    section = Property(resolver=lambda: Container.construct_section)
+class MediaContainer(Container):
+    section = Property(resolver=lambda: MediaContainer.construct_section)
 
     title1 = Property
     title2 = Property
 
     identifier = Property
-    size = Property(type=int)
 
     view_group = Property('viewGroup')
     view_mode = Property('viewMode', int)

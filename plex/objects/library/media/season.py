@@ -1,5 +1,5 @@
 from plex.objects.base import Property
-from plex.objects.library.container import Container
+from plex.objects.library.media.container import MediaContainer
 from plex.objects.library.media.show import Show
 from plex.objects.library.metadata import Metadata
 from plex.objects.library.video import Directory
@@ -46,7 +46,7 @@ class Season(Directory, Metadata):
         return attribute_map.values(), Show.construct(client, node, attribute_map, child=True)
 
 
-class EpisodeContainer(Container, Season):
+class EpisodeContainer(MediaContainer, Season):
     show = Property(resolver=lambda: EpisodeContainer.construct_show)
 
     attribute_map = {

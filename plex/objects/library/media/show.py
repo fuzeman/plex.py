@@ -1,6 +1,6 @@
 from plex.objects.base import Property
 from plex.objects.directory import Directory
-from plex.objects.library.container import Container
+from plex.objects.library.media.container import MediaContainer
 from plex.objects.library.metadata import Metadata
 
 
@@ -43,7 +43,7 @@ class Show(Directory, Metadata):
         })
 
 
-class SeasonContainer(Container, Show):
+class SeasonContainer(MediaContainer, Show):
     attribute_map = {
         'index':    'parentIndex',
         'title':    'parentTitle',

@@ -11,21 +11,21 @@ log = logging.getLogger(__name__)
 
 
 class PlexClient(object):
-    interfaces = None
+    __interfaces = None
 
     def __init__(self, host='127.0.0.1', port=32400):
         self.base_url = 'http://%s:%s' % (host, port)
 
         # Construct interfaces
-        self.interfaces = construct_map(self)
+        self.__interfaces = construct_map(self)
 
         # Discover modules
         ObjectManager.construct()
 
         # Private
-        self._session = requests.Session()
+        self.__session = requests.Session()
 
-    def request(self, path, params=None, data=None, credentials=None, **kwargs):
+    def _request(self, path, params=None, data=None, credentials=None, **kwargs):
         log.debug('"%s" - data: %s', path, data)
 
         request = PlexRequest(
@@ -44,7 +44,7 @@ class PlexClient(object):
         # TODO retrying requests on 502, 503 errors?
 
         try:
-            return self._session.send(prepared)
+            return self.__session.send(prepared)
         except socket.gaierror, e:
             code, _ = e
 
@@ -59,14 +59,14 @@ class PlexClient(object):
         log.info('Rebuilding session and connection pools...')
 
         # Rebuild the connection pool (old pool has stale connections)
-        self._session = requests.Session()
+        self.__session = requests.Session()
 
-        return self._session
+        return self.__session
 
     def __getitem__(self, path):
         parts = path.strip('/').split('/')
 
-        cur = self.interfaces
+        cur = self.__interfaces
 
         while parts and type(cur) is dict:
             key = parts.pop(0)
@@ -83,3 +83,11 @@ class PlexClient(object):
             return InterfaceProxy(cur, parts)
 
         return cur
+
+    def __getattr__(self, name):
+        interface = self.__interfaces.get(None)
+
+        if not interface:
+            raise Exception("Root interface not found")
+
+        return getattr(interface, name)

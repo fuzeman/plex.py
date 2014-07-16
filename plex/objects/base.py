@@ -123,7 +123,7 @@ class Descriptor(Interface):
         if omitted and not child:
             log.warn('%s - Omitted attributes: %s', cls.__name__, ', '.join(omitted))
 
-        return obj
+        return keys_used, obj
 
     def __iter__(self):
         return self._children or []

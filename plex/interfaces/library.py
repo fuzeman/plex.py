@@ -8,7 +8,7 @@ class LibraryInterface(Interface):
         response = self.request('metadata', rating_key)
 
         return self.parse(response, {
-            'MediaContainer': ('Container', {
+            'MediaContainer': ('MediaContainer', {
                 'Directory': {
                     'album':    'Album',
                     'season':   'Season',
@@ -27,7 +27,7 @@ class LibraryInterface(Interface):
         response = self.request('recentlyAdded')
 
         return self.parse(response, {
-            'MediaContainer': ('Container', {
+            'MediaContainer': ('MediaContainer', {
                 'Directory': {
                     'album':    'Album',
                     'season':   'Season'
@@ -42,7 +42,7 @@ class LibraryInterface(Interface):
         response = self.request('sections')
 
         return self.parse(response, {
-            'MediaContainer': ('Container', {
+            'MediaContainer': ('MediaContainer', {
                 'Directory': ('Section', {
                     'Location': 'Location'
                 })

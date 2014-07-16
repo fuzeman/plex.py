@@ -19,10 +19,15 @@ class Interface(object):
 
         raise ValueError('Unknown action "%s" on %s', name, self)
 
-    def request(self, path, params=None, data=None, **kwargs):
-        return self.client.request(
-            '%s/%s' % (self.path, path),
-            params, data,
+    def request(self, path=None, params=None, data=None, **kwargs):
+        if path is None:
+            path = ''
+
+        if self.path:
+            path = '%s/%s' % (self.path, path)
+
+        return self.client._request(
+            path, params, data,
             **kwargs
         )
 
@@ -59,12 +64,15 @@ class Interface(object):
             descriptor = item
 
         if isinstance(descriptor, (str, unicode)):
+            if descriptor not in cls.object_map:
+                raise Exception('Unable to find descriptor by name "%s"' % descriptor)
+
             descriptor = cls.object_map.get(descriptor)
 
         if descriptor is None:
             raise Exception('Unable to find descriptor')
 
-        obj = descriptor.construct(client, node, path=path)
+        keys_used, obj = descriptor.construct(client, node, path=path)
 
         # Lazy-construct children
         def iter_children():
