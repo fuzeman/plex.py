@@ -1,5 +1,6 @@
 from plex.interfaces.channel import ChannelInterface
 from plex.interfaces.library import LibraryInterface
+from plex.interfaces.plugins import PluginInterface
 from plex.interfaces.root import RootInterface
 from plex.interfaces.status import StatusInterface
 
@@ -12,6 +13,7 @@ INTERFACES = [
     # /
     ChannelInterface,
     LibraryInterface,
+    PluginInterface,
     StatusInterface
 ]
 
