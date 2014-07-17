@@ -1,5 +1,5 @@
 from plex.interfaces import construct_map
-from plex.interfaces.base import InterfaceProxy
+from plex.interfaces.core.base import InterfaceProxy
 from plex.objects.core.manager import ObjectManager
 from plex.request import PlexRequest
 

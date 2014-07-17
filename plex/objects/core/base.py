@@ -1,4 +1,5 @@
-from plex.interfaces.base import Interface
+from plex.interfaces.core.base import Interface
+
 import logging
 import traceback
 

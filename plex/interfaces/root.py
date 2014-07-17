@@ -1,4 +1,4 @@
-from plex.interfaces.base import Interface
+from plex.interfaces.core.base import Interface
 
 
 class RootInterface(Interface):
