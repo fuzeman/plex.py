@@ -1,5 +1,6 @@
 from plex.objects.base import Property
 from plex.objects.directory import Directory
+from plex.objects.library.media.container import MediaContainer
 from plex.objects.library.metadata import Metadata
 from plex.objects.library.media.artist import Artist
 
@@ -7,7 +8,7 @@ from plex.objects.library.media.artist import Artist
 class Album(Directory, Metadata):
     artist = Property(resolver=lambda: Album.construct_artist)
 
-    index = Property
+    index = Property(type=int)
 
     year = Property(type=int)
     originally_available_at = Property('originallyAvailableAt')
@@ -15,14 +16,42 @@ class Album(Directory, Metadata):
     track_count = Property('leafCount', int)
     viewed_track_count = Property('viewedLeafCount', int)
 
+    def children(self):
+        response = self.request('children')
+
+        return self.parse(response, {
+            'MediaContainer': (TrackContainer, {
+                'Track': 'Track'
+            })
+        })
+
     @staticmethod
     def construct_artist(client, node):
         attribute_map = {
-            'key': 'parentKey',
-            'ratingKey': 'parentRatingKey',
+            'key':          'parentKey',
+            'ratingKey':    'parentRatingKey',
 
-            'title': 'parentTitle',
-            'thumb': 'parentThumb'
+            'title':        'parentTitle',
+            'thumb':        'parentThumb'
+        }
+
+        return Artist.construct(client, node, attribute_map, child=True)
+
+
+class TrackContainer(MediaContainer, Album):
+    artist = Property(resolver=lambda: TrackContainer.construct_artist)
+
+    attribute_map = {
+        'index':            'parentIndex',
+        'title':            'parentTitle',
+        'year':             'parentYear',
+        '*':                '*'
+    }
+
+    @staticmethod
+    def construct_artist(client, node):
+        attribute_map = {
+            'title':        'grandparentTitle'
         }
 
         return Artist.construct(client, node, attribute_map, child=True)
