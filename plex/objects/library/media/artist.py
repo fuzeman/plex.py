@@ -2,9 +2,10 @@ from plex.objects.base import Property
 from plex.objects.directory import Directory
 from plex.objects.library.media.container import MediaContainer
 from plex.objects.library.metadata import Metadata
+from plex.objects.mixins.rate import RateMixin
 
 
-class Artist(Directory, Metadata):
+class Artist(Directory, Metadata, RateMixin):
     index = Property(type=int)
 
     def children(self):

@@ -3,9 +3,10 @@ from plex.objects.directory import Directory
 from plex.objects.library.media.container import MediaContainer
 from plex.objects.library.metadata import Metadata
 from plex.objects.library.media.artist import Artist
+from plex.objects.mixins.rate import RateMixin
 
 
-class Album(Directory, Metadata):
+class Album(Directory, Metadata, RateMixin):
     artist = Property(resolver=lambda: Album.construct_artist)
 
     index = Property(type=int)
