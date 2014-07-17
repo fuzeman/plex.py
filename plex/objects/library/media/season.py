@@ -53,7 +53,6 @@ class EpisodeContainer(MediaContainer, Season):
         'index':    'parentIndex',
         'title':    'parentTitle',
         'year':     'parentYear',
-
         '*':        '*'
     }
 

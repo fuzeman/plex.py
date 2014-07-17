@@ -11,6 +11,9 @@ class MediaContainer(Container):
 
     identifier = Property
 
+    art = Property
+    thumb = Property
+
     view_group = Property('viewGroup')
     view_mode = Property('viewMode', int)
 

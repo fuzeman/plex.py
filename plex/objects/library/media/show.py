@@ -6,7 +6,7 @@ from plex.objects.mixins.rate import RateMixin
 
 
 class Show(Directory, Metadata, RateMixin):
-    index = Property
+    index = Property(type=int)
     duration = Property(type=int)
 
     studio = Property
