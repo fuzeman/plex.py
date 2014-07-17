@@ -1,5 +1,6 @@
 from requests import Request
 import json
+import urllib
 
 
 class PlexRequest(object):
@@ -62,4 +63,10 @@ class PlexRequest(object):
         path = [self.path]
         path.extend([str(x) for x in self.params])
 
-        return self.client.base_url + '/'.join(x for x in path if x)
+        url = self.client.base_url + '/'.join(x for x in path if x)
+        query = self.kwargs.get('query')
+
+        if query:
+            url += '?' + urllib.urlencode(query)
+
+        return url

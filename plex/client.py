@@ -25,7 +25,7 @@ class PlexClient(object):
         # Private
         self.__session = requests.Session()
 
-    def _request(self, path, params=None, data=None, credentials=None, **kwargs):
+    def _request(self, path, params=None, query=None, data=None, credentials=None, **kwargs):
         log.debug('"%s" - data: %s', path, data)
 
         request = PlexRequest(
@@ -33,6 +33,7 @@ class PlexClient(object):
             path=path,
 
             params=params,
+            query=query,
             data=data,
 
             credentials=credentials,

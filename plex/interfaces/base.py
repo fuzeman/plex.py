@@ -19,15 +19,16 @@ class Interface(object):
 
         raise ValueError('Unknown action "%s" on %s', name, self)
 
-    def request(self, path=None, params=None, data=None, **kwargs):
+    def request(self, path=None, params=None, query=None, data=None, **kwargs):
         if path is None:
             path = ''
 
-        if self.path:
+        if self.path and not path.startswith('/'):
             path = '%s/%s' % (self.path, path)
 
         return self.client._request(
-            path, params, data,
+            path, params,
+            query, data,
             **kwargs
         )
 
