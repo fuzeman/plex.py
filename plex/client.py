@@ -26,8 +26,6 @@ class PlexClient(object):
         self.__session = requests.Session()
 
     def _request(self, path, params=None, query=None, data=None, credentials=None, **kwargs):
-        log.debug('"%s" - data: %s', path, data)
-
         request = PlexRequest(
             self,
             path=path,
@@ -41,6 +39,8 @@ class PlexClient(object):
         )
 
         prepared = request.prepare()
+
+        log.debug('%s %s - data: %s', prepared.method, prepared.path_url, data)
 
         # TODO retrying requests on 502, 503 errors?
 

@@ -23,7 +23,7 @@ class PlexRequest(object):
         self.transform_parameters()
         self.request.url = self.construct_url()
 
-        self.request.data = json.dumps(self.transform_data())
+        self.request.data = self.transform_data()
         self.request.method = self.transform_method()
 
         return self.request.prepare()
@@ -54,9 +54,12 @@ class PlexRequest(object):
         return self.method
 
     def transform_data(self):
-        self.data = self.kwargs.get('data') or {}
+        self.data = self.kwargs.get('data')
 
-        return self.data
+        if self.data is None:
+            return None
+
+        return json.dumps(self.data)
 
     def construct_url(self):
         """Construct a full plex request URI, with `params`."""
