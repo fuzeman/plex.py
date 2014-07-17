@@ -127,3 +127,7 @@ class Descriptor(Interface):
 
     def __iter__(self):
         return self._children or []
+
+
+class DescriptorMixin(Descriptor):
+    pass

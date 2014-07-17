@@ -3,9 +3,10 @@ from plex.objects.library.media.season import Season
 from plex.objects.library.media.show import Show
 from plex.objects.library.metadata import Metadata
 from plex.objects.library.video import Video
+from plex.objects.mixins.rate import RateMixin
 
 
-class Episode(Video, Metadata):
+class Episode(Video, Metadata, RateMixin):
     show = Property(resolver=lambda: Episode.construct_show)
     season = Property(resolver=lambda: Episode.construct_season)
 
@@ -20,7 +21,13 @@ class Episode(Video, Metadata):
     @staticmethod
     def construct_show(client, node):
         attribute_map = {
-            'title': 'grandparentTitle'
+            'key':          'grandparentKey',
+            'ratingKey':    'grandparentRatingKey',
+
+            'title':        'grandparentTitle',
+
+            'theme':        'grandparentTheme',
+            'thumb':        'grandparentThumb'
         }
 
         return Show.construct(client, node, attribute_map, child=True)

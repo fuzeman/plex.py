@@ -1,9 +1,10 @@
 from plex.objects.base import Property
 from plex.objects.library.metadata import Metadata
 from plex.objects.library.video import Video
+from plex.objects.mixins.rate import RateMixin
 
 
-class Movie(Video, Metadata):
+class Movie(Video, Metadata, RateMixin):
     studio = Property
     content_rating = Property('contentRating')
 

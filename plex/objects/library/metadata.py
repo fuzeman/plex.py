@@ -15,9 +15,6 @@ class Metadata(Descriptor):
 
     summary = Property
 
-    rating = Property(type=float)
-    user_rating = Property('userRating', type=float)
-
     thumb = Property
 
     source_title = Property('sourceTitle')
