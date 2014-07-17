@@ -9,6 +9,8 @@ class StatusInterface(Interface):
 
         return self.parse(response, {
             'MediaContainer': ('MediaContainer', {
+                'Track': 'Track',
+
                 'Video': {
                     'episode':  'Episode',
                     'movie':    'Movie'
