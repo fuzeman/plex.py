@@ -1,4 +1,4 @@
-from plex.objects.base import Descriptor, Property
+from plex.objects.core.base import Descriptor, Property
 
 
 class Location(Descriptor):

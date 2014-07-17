@@ -1,4 +1,4 @@
-from plex.objects.base import Property, DescriptorMixin
+from plex.objects.core.base import Property, DescriptorMixin
 
 
 class RateMixin(DescriptorMixin):

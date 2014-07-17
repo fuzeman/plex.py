@@ -1,4 +1,4 @@
-from plex.objects.base import Property
+from plex.objects.core.base import Property
 from plex.objects.directory import Directory
 from plex.objects.library.media.album import Album
 from plex.objects.library.media.artist import Artist

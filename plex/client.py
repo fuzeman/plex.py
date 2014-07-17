@@ -1,6 +1,6 @@
 from plex.interfaces import construct_map
 from plex.interfaces.base import InterfaceProxy
-from plex.objects.manager import ObjectManager
+from plex.objects.core.manager import ObjectManager
 from plex.request import PlexRequest
 
 import logging

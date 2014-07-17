@@ -14,8 +14,8 @@ class ObjectManager(object):
         '__init__.py'
     ]
     ignore_paths = [
-        'plex\\objects\\base.py',
-        'plex\\objects\\manager.py'
+        'plex\\objects\\core\\base.py',
+        'plex\\objects\\core\\manager.py'
     ]
 
     @classmethod
@@ -62,7 +62,7 @@ class ObjectManager(object):
     def construct(cls):
         log.debug('Loading descriptors...')
 
-        cls.base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+        cls.base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../', '..'))
 
         # Load modules, find descriptor classes
         for classes in cls.load():

@@ -1,4 +1,4 @@
-from plex.objects.base import Property
+from plex.objects.core.base import Property
 from plex.objects.library.media.container import MediaContainer
 from plex.objects.library.media.show import Show
 from plex.objects.library.metadata import Metadata

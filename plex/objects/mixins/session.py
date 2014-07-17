@@ -1,4 +1,4 @@
-from plex.objects.base import Descriptor, Property, DescriptorMixin
+from plex.objects.core.base import Descriptor, Property, DescriptorMixin
 
 
 class SessionMixin(DescriptorMixin):

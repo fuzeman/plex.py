@@ -1,4 +1,4 @@
-from plex.objects.base import Property
+from plex.objects.core.base import Property
 from plex.objects.server import Server
 
 

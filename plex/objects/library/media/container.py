@@ -1,4 +1,4 @@
-from plex.objects.base import Property
+from plex.objects.core.base import Property
 from plex.objects.container import Container
 from plex.objects.library.section import Section
 
