@@ -1,7 +1,7 @@
 from plex.objects.core.base import Property
-from plex.objects.library.media.season import Season
-from plex.objects.library.media.show import Show
-from plex.objects.library.metadata import Metadata
+from plex.objects.library.metadata.season import Season
+from plex.objects.library.metadata.show import Show
+from plex.objects.library.metadata.base import Metadata
 from plex.objects.library.video import Video
 from plex.objects.mixins.rate import RateMixin
 

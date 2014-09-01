@@ -1,8 +1,8 @@
 from plex.objects.core.base import Property
 from plex.objects.directory import Directory
-from plex.objects.library.media.album import Album
-from plex.objects.library.media.artist import Artist
-from plex.objects.library.metadata import Metadata
+from plex.objects.library.metadata.album import Album
+from plex.objects.library.metadata.artist import Artist
+from plex.objects.library.metadata.base import Metadata
 from plex.objects.mixins.session import SessionMixin
 
 

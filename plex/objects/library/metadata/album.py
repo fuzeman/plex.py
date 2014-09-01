@@ -1,8 +1,8 @@
 from plex.objects.core.base import Property
 from plex.objects.directory import Directory
-from plex.objects.library.media.container import MediaContainer
-from plex.objects.library.metadata import Metadata
-from plex.objects.library.media.artist import Artist
+from plex.objects.library.container import MediaContainer
+from plex.objects.library.metadata.base import Metadata
+from plex.objects.library.metadata.artist import Artist
 from plex.objects.mixins.rate import RateMixin
 
 

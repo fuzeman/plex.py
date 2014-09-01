@@ -1,7 +1,7 @@
 from plex import Plex
-from plex.objects.library.media.album import Album
-from plex.objects.library.media.movie import Movie
-from plex.objects.library.media.season import Season
+from plex.objects.library.metadata.album import Album
+from plex.objects.library.metadata.movie import Movie
+from plex.objects.library.metadata.season import Season
 
 import logging
 

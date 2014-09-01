@@ -15,6 +15,7 @@ class LibraryInterface(Interface):
                     'show':     'Show'
                 },
                 'Video': {
+                    'episode':  'Episode',
                     'movie':    'Movie'
                 }
             })
