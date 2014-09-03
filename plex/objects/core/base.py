@@ -25,15 +25,22 @@ class Property(object):
         if value is None:
             return None
 
-        # Return string
+        return self.value_convert(value)
+
+    def value_convert(self, value):
         if not self.type:
             return value
 
-        # Convert to specified type
-        try:
-            return self.type(value)
-        except:
-            return None
+        types = self.type if type(self.type) is list else [self.type]
+        result = value
+
+        for target_type in types:
+            try:
+                result = target_type(result)
+            except:
+                return None
+
+        return result
 
     def value_func(self, client, node, keys_used):
         func = self.resolver()
