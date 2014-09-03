@@ -2,11 +2,10 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 from plex import Plex
+from plex.ext.activity import Activity
 from plex.ext.metadata import Guid, Matcher, Metadata
 
-
-
-if __name__ == '__main__':
+def get_item(key):
     episode = Metadata.get(3)
     print "episode:", episode
 
@@ -15,3 +14,14 @@ if __name__ == '__main__':
 
     identifier = Matcher.process(episode)
     print "identifier:", identifier
+
+
+if __name__ == '__main__':
+    get_item(3)
+
+    Activity.start()
+
+    while True:
+        raw_input()
+
+        get_item(3)
