@@ -7,12 +7,14 @@ from plex.ext.activity import Activity
 
 
 if __name__ == '__main__':
-    ac = Activity(
-        sources=['websocket']
-    )
+    ac = Activity()
 
-    @ac.on('notification.playing')
-    def on_playing(info):
-        print 'on_playing', info
+    @ac.on('websocket.playing')
+    def ws_playing(info):
+        print "[websocket.playing]", info
+
+    @ac.on('logging.playing')
+    def lo_playing(info):
+        print "[logging.playing]", info
 
     ac.start()
