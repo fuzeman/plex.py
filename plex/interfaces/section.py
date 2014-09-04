@@ -5,7 +5,7 @@ class SectionInterface(Interface):
     path = 'library/sections'
 
     def all(self, key):
-        response = self.request(key, 'all')
+        response = self.http.get(key, 'all')
 
         return self.parse(response, {
             'MediaContainer': ('MediaContainer', {

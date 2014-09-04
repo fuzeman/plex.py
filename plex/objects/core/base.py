@@ -92,6 +92,9 @@ class Descriptor(Interface):
 
     @classmethod
     def construct(cls, client, node, attribute_map=None, path=None, child=False):
+        if node is None:
+            return [], None
+
         keys_available = node.keys()
         keys_used = []
 

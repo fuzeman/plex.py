@@ -22,7 +22,7 @@ class Show(Directory, Metadata, RateMixin):
     viewed_episode_count = Property('viewedLeafCount', int)
 
     def children(self):
-        response = self.request('children')
+        response = self.http.get('children')
 
         return self.parse(response, {
             'MediaContainer': (SeasonContainer, {
@@ -33,7 +33,7 @@ class Show(Directory, Metadata, RateMixin):
         })
 
     def all_leaves(self):
-        response = self.request('allLeaves')
+        response = self.http.get('allLeaves')
 
         return self.parse(response, {
             'MediaContainer': ('EpisodeContainer', {

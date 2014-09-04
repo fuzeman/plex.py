@@ -18,7 +18,7 @@ class Album(Directory, Metadata, RateMixin):
     viewed_track_count = Property('viewedLeafCount', int)
 
     def children(self):
-        response = self.request('children')
+        response = self.http.get('children')
 
         return self.parse(response, {
             'MediaContainer': (TrackContainer, {

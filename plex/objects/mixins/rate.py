@@ -6,7 +6,7 @@ class RateMixin(DescriptorMixin):
     user_rating = Property('userRating', type=float)
 
     def scrobble(self):
-        response = self.request(
+        response = self.http.get(
             '/:/scrobble',
             query={
                 'identifier': 'com.plexapp.plugins.library',
@@ -17,7 +17,7 @@ class RateMixin(DescriptorMixin):
         return response.status_code == 200
 
     def rate(self, value):
-        response = self.request(
+        response = self.http.get(
             '/:/rate',
             query={
                 'identifier': 'com.plexapp.plugins.library',

@@ -9,7 +9,7 @@ class Artist(Directory, Metadata, RateMixin):
     index = Property(type=int)
 
     def children(self):
-        response = self.request('children')
+        response = self.http.get('children')
 
         return self.parse(response, {
             'MediaContainer': (AlbumContainer, {

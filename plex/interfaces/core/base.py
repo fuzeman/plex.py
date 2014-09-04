@@ -19,18 +19,12 @@ class Interface(object):
 
         raise ValueError('Unknown action "%s" on %s', name, self)
 
-    def request(self, path=None, params=None, query=None, data=None, **kwargs):
-        if path is None:
-            path = ''
+    @property
+    def http(self):
+        if not self.client:
+            return None
 
-        if self.path and not path.startswith('/'):
-            path = '%s/%s' % (self.path, path)
-
-        return self.client._request(
-            path, params,
-            query, data,
-            **kwargs
-        )
+        return self.client.http.configure(self.path)
 
     def parse(self, response, schema):
         root = etree.fromstring(response.content)

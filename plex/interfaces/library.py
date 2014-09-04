@@ -5,7 +5,7 @@ class LibraryInterface(Interface):
     path = 'library'
 
     def metadata(self, rating_key):
-        response = self.request('metadata', rating_key)
+        response = self.http.get('metadata', rating_key)
 
         return self.parse(response, {
             'MediaContainer': ('MediaContainer', {
@@ -25,7 +25,7 @@ class LibraryInterface(Interface):
         raise NotImplementedError()
 
     def recently_added(self):
-        response = self.request('recentlyAdded')
+        response = self.http.get('recentlyAdded')
 
         return self.parse(response, {
             'MediaContainer': ('MediaContainer', {
@@ -40,7 +40,7 @@ class LibraryInterface(Interface):
         })
 
     def sections(self):
-        response = self.request('sections')
+        response = self.http.get('sections')
 
         return self.parse(response, {
             'MediaContainer': ('MediaContainer', {

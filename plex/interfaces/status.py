@@ -5,7 +5,7 @@ class StatusInterface(Interface):
     path = 'status'
 
     def sessions(self):
-        response = self.request('sessions')
+        response = self.http.get('sessions')
 
         return self.parse(response, {
             'MediaContainer': ('MediaContainer', {

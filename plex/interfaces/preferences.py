@@ -5,7 +5,7 @@ class PreferencesInterface(Interface):
     path = ':/prefs'
 
     def get(self, id=None):
-        response = self.request()
+        response = self.http.get()
 
         container = self.parse(response, {
             'MediaContainer': ('MediaContainer', {

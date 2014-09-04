@@ -3,7 +3,7 @@ from plex.interfaces.core.base import Interface
 
 class RootInterface(Interface):
     def detail(self):
-        response = self.request()
+        response = self.http.get()
 
         return self.parse(response, {
             'MediaContainer': ('Detail', {
@@ -12,7 +12,7 @@ class RootInterface(Interface):
         })
 
     def clients(self):
-        response = self.request('clients')
+        response = self.http.get('clients')
 
         return self.parse(response, {
             'MediaContainer': ('Container', {
@@ -24,7 +24,7 @@ class RootInterface(Interface):
         pass
 
     def servers(self):
-        response = self.request('servers')
+        response = self.http.get('servers')
 
         return self.parse(response, {
             'MediaContainer': ('Container', {
