@@ -1,7 +1,11 @@
 from functools import wraps
 from urlparse import urlparse
-from lxml import etree
 import logging
+
+try:
+    from lxml import etree as ET
+except ImportError:
+    from xml.etree import ElementTree as ET
 
 log = logging.getLogger(__name__)
 
@@ -27,7 +31,7 @@ class Interface(object):
         return self.client.http.configure(self.path)
 
     def parse(self, response, schema):
-        root = etree.fromstring(response.content)
+        root = ET.fromstring(response.content)
 
         url = urlparse(response.url)
         path = url.path
