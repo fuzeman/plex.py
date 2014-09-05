@@ -89,7 +89,6 @@ class Descriptor(Interface):
             elif isinstance(value, Property):
                 yield key, value
 
-
     @classmethod
     def construct(cls, client, node, attribute_map=None, path=None, child=False):
         if node is None:
@@ -127,6 +126,9 @@ class Descriptor(Interface):
             #log.debug('%s - Found property "%s"', cls.__name__, key)
             setattr(obj, key, prop.value(client, node_key, node, keys_used))
 
+        # Post-fill transformation
+        obj.__transform__()
+
         # Look for omitted keys
         omitted = list(set(keys_available) - set(keys_used))
         omitted.sort()
@@ -135,6 +137,9 @@ class Descriptor(Interface):
             log.warn('%s - Omitted attributes: %s', cls.__name__, ', '.join(omitted))
 
         return keys_used, obj
+
+    def __transform__(self):
+        pass
 
     def __iter__(self):
         return self._children or []

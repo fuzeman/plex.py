@@ -43,7 +43,7 @@ class LibraryInterface(Interface):
         response = self.http.get('sections')
 
         return self.parse(response, {
-            'MediaContainer': ('MediaContainer', {
+            'MediaContainer': ('SectionContainer', {
                 'Directory': ('Section', {
                     'Location': 'Location'
                 })
