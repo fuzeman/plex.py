@@ -25,6 +25,8 @@ class HttpClient(object):
             path = self.base_path + '/' + path
         elif self.base_path:
             path = self.base_path
+        else:
+            path = ''
 
         request = PlexRequest(
             self.client,
