@@ -1,6 +1,10 @@
 from plex.request import PlexRequest
 
+import logging
 import requests
+import socket
+
+log = logging.getLogger(__name__)
 
 
 class HttpClient(object):
