@@ -10,4 +10,4 @@ class SessionMixin(DescriptorMixin):
 
 
 class Session(Descriptor):
-    key = Property('sessionKey')
+    key = Property('sessionKey', int)
