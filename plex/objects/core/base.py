@@ -144,6 +144,21 @@ class Descriptor(Interface):
     def __iter__(self):
         return self._children or []
 
+    def __getstate__(self):
+        data = self.__dict__
+
+        def build():
+            for key, value in data.items():
+                if key.startswith('_'):
+                    continue
+
+                if key in ['client']:
+                    continue
+
+                yield key, value
+
+        return dict(build())
+
 
 class DescriptorMixin(Descriptor):
     pass
