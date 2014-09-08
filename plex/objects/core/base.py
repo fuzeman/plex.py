@@ -2,6 +2,7 @@ from plex.interfaces.core.base import Interface
 
 import logging
 import traceback
+import types
 
 log = logging.getLogger(__name__)
 
@@ -149,8 +150,8 @@ class Descriptor(Interface):
 
         def build():
             for key, value in data.items():
-                if key.startswith('_'):
-                    continue
+                if isinstance(value, types.GeneratorType):
+                    value = list(value)
 
                 if key in ['client']:
                     continue
