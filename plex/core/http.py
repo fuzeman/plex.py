@@ -1,5 +1,6 @@
 from plex.request import PlexRequest
 
+import hashlib
 import logging
 import requests
 import socket
@@ -12,15 +13,19 @@ class HttpClient(object):
         self.client = client
 
         self.session = requests.Session()
-        self.base_path = None
 
-    def configure(self, path=None):
-        self.base_path = path
+        self.c_cache = None
+        self.c_path = None
+
+    def configure(self, path=None, cache=None):
+        self.c_path = path
+        self.c_cache = cache
 
         return self
 
     def reset(self):
-        self.base_path = None
+        self.c_path = None
+        self.c_cache = None
 
         return self
 
@@ -29,13 +34,13 @@ class HttpClient(object):
             # Convert `path` to string (excluding NoneType)
             path = str(path)
 
-        if self.base_path and path:
+        if self.c_path and path:
             # Prepend `base_path` to relative `path`s
             if not path.startswith('/'):
-                path = self.base_path + '/' + path
+                path = self.c_path + '/' + path
 
-        elif self.base_path:
-            path = self.base_path
+        elif self.c_path:
+            path = self.c_path
         elif not path:
             path = ''
 
@@ -52,14 +57,18 @@ class HttpClient(object):
             **kwargs
         )
 
-        # Reset base configuration
-        self.reset()
-
         prepared = request.prepare()
+
+        # Try retrieve cached response
+        response = self._cache_lookup(prepared)
+
+        if response:
+            log.debug('Returning cached response for request [%s %s]', prepared.method, prepared.url)
+            return response
 
         # TODO retrying requests on 502, 503 errors?
         try:
-            return self.session.send(prepared)
+            response = self.session.send(prepared)
         except socket.gaierror, e:
             code, _ = e
 
@@ -68,7 +77,16 @@ class HttpClient(object):
 
             log.warn('Encountered socket.gaierror (code: 8)')
 
-            return self._rebuild().send(prepared)
+            response = self._rebuild().send(prepared)
+
+        # Store response in cache
+        self._cache_store(prepared, response)
+
+        # Reset configuration
+        # TODO this should be trigger when exceptions are encountered in send()
+        self.reset()
+
+        return response
 
     def get(self, path=None, params=None, query=None, data=None, **kwargs):
         return self.request('GET', path, params, query, data, **kwargs)
@@ -89,6 +107,36 @@ class HttpClient(object):
         self.session = requests.Session()
 
         return self.session
+
+    def _cache_lookup(self, request):
+        if self.c_cache is None:
+            return None
+
+        if request.method not in ['GET']:
+            return None
+
+        # Retrieve from cache
+        return self.c_cache.get(self._cache_key(request))
+
+    def _cache_store(self, request, response):
+        if self.c_cache is None:
+            return None
+
+        if request.method not in ['GET']:
+            return None
+
+        # Store in cache
+        self.c_cache[self._cache_key(request)] = response
+
+    @staticmethod
+    def _cache_key(request):
+        raw = ','.join([request.method, request.url])
+
+        # Generate MD5 hash of key
+        m = hashlib.md5()
+        m.update(raw)
+
+        return m.hexdigest()
 
     def __enter__(self):
         return self
