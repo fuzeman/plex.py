@@ -13,21 +13,13 @@ class HttpClient(object):
         self.client = client
 
         self.session = requests.Session()
-
-        self.c_cache = None
         self.c_path = None
 
-    def configure(self, path=None, cache=None):
-        self.c_path = path
-        self.c_cache = cache
+    @property
+    def cache(self):
+        definitions = self.client.configuration.get('cache', {})
 
-        return self
-
-    def reset(self):
-        self.c_path = None
-        self.c_cache = None
-
-        return self
+        return definitions.get('http')
 
     def request(self, method, path=None, params=None, query=None, data=None, credentials=None, **kwargs):
         if path is not None and type(path) is not str:
@@ -43,6 +35,9 @@ class HttpClient(object):
             path = self.c_path
         elif not path:
             path = ''
+
+        # reset request configuration
+        self.reset()
 
         request = PlexRequest(
             self.client,
@@ -82,10 +77,6 @@ class HttpClient(object):
         # Store response in cache
         self._cache_store(prepared, response)
 
-        # Reset configuration
-        # TODO this should be trigger when exceptions are encountered in send()
-        self.reset()
-
         return response
 
     def get(self, path=None, params=None, query=None, data=None, **kwargs):
@@ -100,6 +91,14 @@ class HttpClient(object):
     def delete(self, path=None, params=None, query=None, data=None, **kwargs):
         return self.request('DELETE', path, params, query, data, **kwargs)
 
+    def configure(self, path=None):
+        self.c_path = path
+        return self
+
+    def reset(self):
+        self.c_path = None
+        return self
+
     def _rebuild(self):
         log.info('Rebuilding session and connection pools...')
 
@@ -109,24 +108,28 @@ class HttpClient(object):
         return self.session
 
     def _cache_lookup(self, request):
-        if self.c_cache is None:
+        if self.cache is None:
+            log.debug('Cache not available')
             return None
 
         if request.method not in ['GET']:
+            log.debug('Not caching request with method "%s"', request.method)
             return None
 
         # Retrieve from cache
-        return self.c_cache.get(self._cache_key(request))
+        return self.cache.get(self._cache_key(request))
 
     def _cache_store(self, request, response):
-        if self.c_cache is None:
+        if self.cache is None:
+            log.debug('Cache not available')
             return None
 
         if request.method not in ['GET']:
+            log.debug('Not caching request with method "%s"', request.method)
             return None
 
         # Store in cache
-        self.c_cache[self._cache_key(request)] = response
+        self.cache[self._cache_key(request)] = response
 
     @staticmethod
     def _cache_key(request):

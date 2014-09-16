@@ -17,9 +17,6 @@ class Interface(object):
     def __init__(self, client):
         self.client = client
 
-        # Request configuration
-        self.c_cache = None
-
     def __getitem__(self, name):
         if hasattr(self, name):
             return getattr(self, name)
@@ -31,12 +28,7 @@ class Interface(object):
         if not self.client:
             return None
 
-        return self.client.http.configure(self.path, self.c_cache)
-
-    def use(self, cache):
-        self.c_cache = cache
-
-        return self
+        return self.client.http.configure(self.path)
 
     def parse(self, response, schema):
         if response.status_code < 200 or response.status_code >= 300:
