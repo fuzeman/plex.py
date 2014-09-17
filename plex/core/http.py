@@ -17,9 +17,7 @@ class HttpClient(object):
 
     @property
     def cache(self):
-        definitions = self.client.configuration.get('cache', {})
-
-        return definitions.get('http')
+        return self.client.configuration.get('cache.http')
 
     def request(self, method, path=None, params=None, query=None, data=None, credentials=None, **kwargs):
         if path is not None and type(path) is not str:
