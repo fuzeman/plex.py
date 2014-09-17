@@ -8,6 +8,10 @@ class ConfigurationManager(object):
     def current(self):
         return self.stack[-1]
 
+    @property
+    def defaults(self):
+        return self.stack[0]
+
     def cache(self, **definitions):
         return Configuration(self).cache(**definitions)
 
@@ -15,10 +19,19 @@ class ConfigurationManager(object):
         return Configuration(self).server(host, port)
 
     def get(self, key, default=None):
-        return self.current.get(key, default)
+        for x in range(len(self.stack) - 1, -1, -1):
+            value = self.stack[x].get(key)
+
+            if value is not None:
+                return value
+
+        return default
 
     def __getitem__(self, key):
-        return self.current[key]
+        return self.get(key)
+
+    def __setitem__(self, key, value):
+        self.current[key] = value
 
 
 class Configuration(object):
@@ -28,15 +41,14 @@ class Configuration(object):
         self.data = {}
 
     def cache(self, **definitions):
-        self.data['cache'] = definitions
+        for key, value in definitions.items():
+            self.data['cache.%s' % key] = value
 
         return self
 
     def server(self, host='127.0.0.1', port=32400):
-        self.data['server'] = {
-            'host': host,
-            'port': port
-        }
+        self.data['server.host'] = host
+        self.data['server.port'] = port
 
         return self
 
@@ -52,4 +64,7 @@ class Configuration(object):
         assert item == self
 
     def __getitem__(self, key):
-        return self[key]
+        return self.data[key]
+
+    def __setitem__(self, key, value):
+        self.data[key] = value
