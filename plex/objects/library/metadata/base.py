@@ -19,8 +19,8 @@ class Metadata(Descriptor):
 
     source_title = Property('sourceTitle')
 
-    added_at = Property('addedAt')
-    last_viewed_at = Property('lastViewedAt')
+    added_at = Property('addedAt', int)
+    last_viewed_at = Property('lastViewedAt', int)
 
     @staticmethod
     def construct_section(client, node):
