@@ -8,6 +8,7 @@ class Metadata(Descriptor):
     key = Property
     guid = Property
     rating_key = Property('ratingKey')
+    extra_key = Property('primaryExtraKey')
 
     title = Property
     title_sort = Property('titleSort')
