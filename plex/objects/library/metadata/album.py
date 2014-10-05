@@ -9,7 +9,7 @@ from plex.objects.mixins.rate import RateMixin
 
 class Album(Directory, Metadata, RateMixin):
     artist = Property(resolver=lambda: Album.construct_artist)
-    genres = Property(resolver=lambda: Album.construct_genres)
+    genres = Property(resolver=lambda: Genre.from_node)
 
     index = Property(type=int)
 
@@ -39,17 +39,6 @@ class Album(Directory, Metadata, RateMixin):
         }
 
         return Artist.construct(client, node, attribute_map, child=True)
-
-    @staticmethod
-    def construct_genres(client, node):
-        items = []
-
-        for genre in node.findall('Genre'):
-            _, obj = Genre.construct(client, genre, child=True)
-
-            items.append(obj)
-
-        return [], items
 
 
 class TrackContainer(MediaContainer, Album):
