@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MediaContainer size="2" identifier="com.plexapp.plugins.library" title1="Plex Library">
+    <Directory key="1" type="show" title="TV Shows" agent="com.plexapp.agents.thetvdb" scanner="Plex Series Scanner" language="en">
+        <Location id="1" path="C:\Mock\TV Shows" />
+    </Directory>
+    <Directory key="2" type="movie" title="Movies" agent="com.plexapp.agents.themoviedb" scanner="Plex Movie Scanner" language="en">
+        <Location id="2" path="C:\Mock\Movies" />
+    </Directory>
+</MediaContainer>
