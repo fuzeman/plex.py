@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MediaContainer>
+<Setting id="FriendlyName" default="" type="text" value="" hidden="0" advanced="0" group="general" />
+<Setting id="collectUsageData" default="true" type="bool" value="true" hidden="0" advanced="0" group="general" />
+<Setting id="FSEventLibraryUpdatesEnabled" default="false" type="bool" value="false" hidden="0" advanced="0" group="library" />
+</MediaContainer>
