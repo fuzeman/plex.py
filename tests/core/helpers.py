@@ -1,6 +1,6 @@
 import os
 
-TESTS_PATH = os.path.abspath(os.path.dirname(__file__).replace('\\core', ''))
+TESTS_PATH = os.path.abspath(os.path.dirname(__file__) + os.path.sep + '..')
 
 
 def read(path):
