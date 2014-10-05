@@ -28,10 +28,30 @@ def test_recently_added():
     assert items[0].title == "TRON: Legacy"
     assert items[0].year == 2010
 
+    assert items[0].director.tag == "Joseph Kosinski"
+    assert items[0].country.tag == "USA"
+
+    assert [genre.tag for genre in items[0].genres] == [
+        "Action",
+        "Adventure"
+    ]
+
+    assert [writer.tag for writer in items[0].writers] == [
+        "Adam Horowitz",
+        "Richard Jefferies"
+    ]
+
+    assert [role.tag for role in items[0].roles] == [
+        "Garrett Hedlund",
+        "Jeff Bridges",
+        "Olivia Wilde"
+    ]
+
     # Validate 'season'
     assert items[1].type == 'season'
     assert items[1].title == "Specials"
     assert items[1].index == 0
+
     assert items[1].show.title == "Gold Rush"
     assert items[1].show.index == 1
 
@@ -39,6 +59,7 @@ def test_recently_added():
     assert items[2].type == 'album'
     assert items[2].title == "Angel Milk"
     assert items[2].index == 1
+
     assert items[2].artist.title == u"Télépopmusik"
 
     assert [genre.tag for genre in items[2].genres] == [
