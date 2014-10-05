@@ -1,2 +1,2 @@
 decorator
-responses
+git+git://github.com/fuzeman/responses.git
