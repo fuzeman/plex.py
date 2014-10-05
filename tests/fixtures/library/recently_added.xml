@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MediaContainer size="3" identifier="com.plexapp.plugins.library">
+    <Video type="movie" title="TRON: Legacy" year="2010">
+        <Genre tag="Action" />
+        <Genre tag="Adventure" />
+        <Writer tag="Adam Horowitz" />
+        <Writer tag="Richard Jefferies" />
+        <Director tag="Joseph Kosinski" />
+        <Country tag="USA" />
+        <Role tag="Garrett Hedlund" />
+        <Role tag="Jeff Bridges" />
+        <Role tag="Olivia Wilde" />
+    </Video>
+    <Directory type="season" title="Specials" parentTitle="Gold Rush" index="0" parentIndex="1" leafCount="1" viewedLeafCount="0">
+    </Directory>
+    <Directory type="album" title="Angel Milk" parentTitle="Télépopmusik" index="1" year="2005" leafCount="15" viewedLeafCount="0">
+        <Genre tag="Electronic" />
+        <Genre tag="Electronica" />
+    </Directory>
+</MediaContainer>
