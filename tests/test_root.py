@@ -37,6 +37,26 @@ def test_version():
     assert version == "0.9.9.16.555-50cd0c3"
 
 
+@responses.activate
+def test_clients():
+    responses.add(
+        responses.GET, 'http://mock:32400/clients',
+        body=read('fixtures/clients.xml'), status=200,
+        content_type='application/xml'
+    )
+
+    container = Plex.clients()
+    assert container is not None
+
+    items = list(container)
+    assert len(items) == 1
+
+    assert items[0].name == "One"
+    assert items[0].address == "192.168.1.100"
+    assert items[0].version == "1.2.2.331-2d6426d7"
+
+    assert items[0].protocol_capabilities == "navigation,playback,timeline,mirror,playqueues"
+
 
 @responses.activate
 def test_servers():
