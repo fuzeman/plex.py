@@ -59,6 +59,45 @@ def test_clients():
 
 
 @responses.activate
+def test_clients_filter():
+    responses.add(
+        responses.GET, 'http://mock:32400/clients',
+        body=read('fixtures/clients.xml'), status=200,
+        content_type='application/xml'
+    )
+
+    container = Plex.clients()
+    assert container is not None
+
+    items = list(container.filter(["a7d1b50a-42d1-40b5-9db6-6b0afd013438"]))
+    assert len(items) == 1
+
+    assert items[0].machine_identifier == "a7d1b50a-42d1-40b5-9db6-6b0afd013438"
+
+
+@responses.activate
+def test_clients_get():
+    responses.add(
+        responses.GET, 'http://mock:32400/clients',
+        body=read('fixtures/clients.xml'), status=200,
+        content_type='application/xml'
+    )
+
+    container = Plex.clients()
+    assert container is not None
+
+    # Try retrieve item that exists
+    item = container.get("a7d1b50a-42d1-40b5-9db6-6b0afd013438")
+    assert item is not None
+
+    assert item.machine_identifier == "a7d1b50a-42d1-40b5-9db6-6b0afd013438"
+
+    # Try retrieve item that doesn't exist
+    item = container.get("invalid-identifier")
+    assert item is None
+
+
+@responses.activate
 def test_servers():
     responses.add(
         responses.GET, 'http://mock:32400/servers',

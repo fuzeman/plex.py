@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <MediaContainer size="1">
-    <Server name="One" host="192.168.1.100" address="192.168.1.100" port="3005" version="1.2.2.331-2d6426d7" protocol="plex" product="Plex Home Theater" deviceClass="HTPC" protocolVersion="1" protocolCapabilities="navigation,playback,timeline,mirror,playqueues" />
+    <Server name="One" host="192.168.1.100" address="192.168.1.100" port="3005" machineIdentifier="a7d1b50a-42d1-40b5-9db6-6b0afd013438" version="1.2.2.331-2d6426d7" protocol="plex" product="Plex Home Theater" deviceClass="HTPC" protocolVersion="1" protocolCapabilities="navigation,playback,timeline,mirror,playqueues" />
 </MediaContainer>
