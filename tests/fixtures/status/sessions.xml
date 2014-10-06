@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MediaContainer size="3">
+    <Video grandparentTitle="30 Rock" guid="com.plexapp.agents.thetvdb://79488/1/3?lang=en" index="3" parentIndex="1" sessionKey="3" title="Blind Date" type="episode" viewOffset="291" year="2006">
+        <Writer id="26" tag="Tina Fey"/>
+        <Director id="28" tag="Adam Berstein"/>
+        <User title="someone"/>
+        <Player platform="Plex Home Theater" product="Plex Home Theater" state="playing" title="One"/>
+        <TranscodeSession throttled="0" progress="3.2000000476837158" speed="12.199999809265137"/>
+    </Video>
+    <Video guid="com.plexapp.agents.none://9c517f9a04a29b8539912288dfabecf6?lang=xn" sessionKey="5" title="The Hobbit The Desolation of Smaug" titleSort="Hobbit The Desolation of Smaug" type="movie" viewOffset="249" year="2014">
+        <Field locked="1" name="collection"/>
+        <User title="someone"/>
+        <Player platform="Plex Home Theater" product="Plex Home Theater" state="playing" title="One"/>
+        <TranscodeSession throttled="0" progress="0.60000002384185791" speed="18.299999237060547"/>
+    </Video>
+    <Track grandparentTitle="Télépopmusik" guid="com.plexapp.agents.lastfm://T%C3%A9l%C3%A9popmusik/Angel%20Milk/1?lang=en" index="1" parentIndex="1" parentTitle="Angel Milk" sessionKey="4" title="Don&apos;t look back" type="track">
+        <User title="someone"/>
+        <Player platform="Plex Home Theater" product="Plex Home Theater" state="playing" title="One" />
+    </Track>
+</MediaContainer>
