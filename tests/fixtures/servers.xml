@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MediaContainer size="2">
+    <Server name="One" host="192.168.1.100" address="192.168.1.100" port="32400" version="0.9.9.16.555-50cd0c3" />
+    <Server name="Two" host="192.168.1.101" address="192.168.1.101" port="32400" version="0.9.9.14.531-7eef8c6" />
+</MediaContainer>
