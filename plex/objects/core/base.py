@@ -51,7 +51,7 @@ class Property(object):
 
             keys_used.extend(keys)
             return value
-        except Exception, ex:
+        except Exception as ex:
             log.warn('Exception in value function (%s): %s - %s', func, ex, traceback.format_exc())
             return None
 
