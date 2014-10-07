@@ -1,10 +1,7 @@
+from plex.core.six.moves.urllib_parse import urlparse
+
 from functools import wraps
 import logging
-
-try:
-    from urlparse import urlparse
-except ImportError:
-    from urllib.parse import urlparse
 
 try:
     from lxml import etree as ET
