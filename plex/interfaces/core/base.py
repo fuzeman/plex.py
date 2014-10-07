@@ -1,6 +1,10 @@
 from functools import wraps
-from urlparse import urlparse
 import logging
+
+try:
+    from urlparse import urlparse
+except ImportError:
+    from urllib.parse import urlparse
 
 try:
     from lxml import etree as ET
