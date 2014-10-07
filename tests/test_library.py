@@ -1,6 +1,5 @@
-# coding=utf-8
-
 from plex import Plex
+from plex.core import six
 
 from tests.core.helpers import read
 import responses
@@ -60,7 +59,7 @@ def test_recently_added():
     assert items[2].title == "Angel Milk"
     assert items[2].index == 1
 
-    assert items[2].artist.title == u"Télépopmusik"
+    assert items[2].artist.title == six.u('T\xe9l\xe9popmusik')
 
     assert [genre.tag for genre in items[2].genres] == [
         "Electronic",

@@ -137,7 +137,7 @@ class HttpClient(object):
 
         # Generate MD5 hash of key
         m = hashlib.md5()
-        m.update(raw)
+        m.update(raw.encode('utf-8'))
 
         return m.hexdigest()
 

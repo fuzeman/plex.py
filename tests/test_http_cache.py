@@ -12,7 +12,7 @@ def test_cache():
     http_cache = {}
 
     # Mock response
-    body = read('fixtures/detail_a.xml')
+    body = read('fixtures/detail_a.xml', mode='r')
 
     responses.add_callback(
         responses.GET, 'http://mock:32400/',
@@ -25,7 +25,7 @@ def test_cache():
         assert Plex.version() == "0.9.9.16.555-50cd0c3"
 
         # Change body, ensure cached version is returned
-        body = read('fixtures/detail_b.xml')
+        body = read('fixtures/detail_b.xml', mode='r')
 
         assert Plex.version() == "0.9.9.16.555-50cd0c3"
 
