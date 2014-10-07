@@ -11,7 +11,7 @@ Plex.configuration.defaults.server(host='mock')
 def test_detail():
     responses.add(
         responses.GET, 'http://mock:32400',
-        body=read('fixtures/detail.xml'), status=200,
+        body=read('fixtures/detail_a.xml'), status=200,
         content_type='application/xml'
     )
 
@@ -28,7 +28,7 @@ def test_detail():
 def test_version():
     responses.add(
         responses.GET, 'http://mock:32400',
-        body=read('fixtures/detail.xml'), status=200,
+        body=read('fixtures/detail_a.xml'), status=200,
         content_type='application/xml'
     )
 
