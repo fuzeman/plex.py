@@ -1,6 +1,6 @@
 # plex.py
 
-[![](https://travis-ci.org/fuzeman/plex.py.svg?branch=master)](https://travis-ci.org/fuzeman/plex.py) [![](https://coveralls.io/repos/fuzeman/plex.py/badge.png?branch=master)](https://coveralls.io/r/fuzeman/plex.py)
+[![](https://travis-ci.org/fuzeman/plex.py.svg?branch=master)](https://travis-ci.org/fuzeman/plex.py) [![Coverage Status](https://coveralls.io/repos/fuzeman/plex.py/badge.png?branch=master)](https://coveralls.io/r/fuzeman/plex.py?branch=master)
 
 Python interface for the Plex Media Server API.
 
