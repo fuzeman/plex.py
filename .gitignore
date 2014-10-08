@@ -1,5 +1,6 @@
 *.pyc
 
-/virtualenv
-
 /examples/cache
+
+/plex.py.egg-info
+/virtualenv
