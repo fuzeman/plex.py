@@ -1,5 +1,5 @@
 from plex import Plex
-from plex.core import six
+from plex.lib import six
 
 from tests.core.helpers import read
 import responses

@@ -1,4 +1,4 @@
-from plex.core.six.moves.urllib_parse import urlencode
+from plex.lib.six.moves.urllib_parse import urlencode
 
 from requests import Request
 import json

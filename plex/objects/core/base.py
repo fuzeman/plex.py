@@ -1,4 +1,4 @@
-from plex.core.six import add_metaclass
+from plex.lib.six import add_metaclass
 from plex.interfaces.core.base import Interface
 
 import logging

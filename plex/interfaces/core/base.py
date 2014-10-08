@@ -1,5 +1,5 @@
-from plex.core.six import string_types
-from plex.core.six.moves.urllib_parse import urlparse
+from plex.lib.six import string_types
+from plex.lib.six.moves.urllib_parse import urlparse
 
 from functools import wraps
 import logging

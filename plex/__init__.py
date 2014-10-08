@@ -1,5 +1,5 @@
 from plex.client import PlexClient
-from plex.core.six import add_metaclass
+from plex.lib.six import add_metaclass
 from plex.helpers import has_attribute
 
 __version__ = '0.5.0-develop'
