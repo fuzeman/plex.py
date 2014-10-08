@@ -1,6 +1,5 @@
-# coding=utf-8
-
 from plex import Plex
+from plex.core import six
 
 from tests.core.helpers import read
 import responses
@@ -46,7 +45,7 @@ def test_sessions():
     assert items[2].type == 'track'
 
     assert items[2].album.title == "Angel Milk"
-    assert items[2].artist.title == u"Télépopmusik"
+    assert items[2].artist.title == six.u('T\xe9l\xe9popmusik')
 
     assert items[2].session.key == 4
     assert items[2].session.player.title == "One"
