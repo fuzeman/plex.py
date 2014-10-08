@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MediaContainer size="2" identifier="com.plexapp.plugins.library" title1="TV Shows" title2="All Shows" viewGroup="show" viewMode="131122">
+    <Directory type="show" title="Gold Rush" index="1" year="2010" leafCount="1" viewedLeafCount="0" childCount="1">
+        <Genre tag="Reality"/>
+        <Genre tag="Special Interest"/>
+        <Role tag="Todd Hoffman"/>
+        <Role tag="Jack Hoffman"/>
+        <Role tag="James Harness"/>
+    </Directory>
+    <Directory type="show" title="Parks and Recreation" index="1" year="2009" leafCount="3" viewedLeafCount="2" childCount="1">
+        <Genre tag="Comedy"/>
+        <Role tag="Amy Poehler"/>
+        <Role tag="Adam Scott"/>
+        <Role tag="Nick Offerman"/>
+    </Directory>
+</MediaContainer>

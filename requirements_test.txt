@@ -1,0 +1,3 @@
+decorator
+git+git://github.com/fuzeman/responses.git
+jsonpickle

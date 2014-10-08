@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MediaContainer size="6" identifier="com.plexapp.plugins.library" parentIndex="1" viewGroup="episode" viewMode="131133">
+    <Video type="episode" index="1" parentIndex="10"/>
+    <Video type="episode" index="2" parentIndex="10"/>
+
+    <Video type="episode" index="1" parentIndex="11"/>
+    <Video type="episode" index="2" parentIndex="11"/>
+
+    <Video type="episode" index="1" parentIndex="12"/>
+    <Video type="episode" index="2" parentIndex="12"/>
+</MediaContainer>

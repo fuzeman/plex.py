@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MediaContainer size="1" identifier="com.plexapp.plugins.library">
+    <Video guid="com.plexapp.agents.thetvdb://84912/6/1?lang=en" type="episode" title="London (1)" grandparentTitle="Parks and Recreation" index="1" parentIndex="6">
+        <Writer tag="Michael Schur"/>
+        <Director tag="Dean Holland"/>
+    </Video>
+</MediaContainer>
