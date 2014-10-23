@@ -2,7 +2,7 @@ from plex.client import PlexClient
 from plex.lib.six import add_metaclass
 from plex.helpers import has_attribute
 
-__version__ = '0.6.0'
+__version__ = '0.6.1'
 
 
 class PlexMeta(type):
