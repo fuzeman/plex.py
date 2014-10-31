@@ -1,6 +1,6 @@
 from plex import __version__
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name='plex.py',
@@ -12,7 +12,7 @@ setup(
     author_email='me@dgardiner.net',
 
     description='Python interface for the Plex Media Server API',
-    packages=['plex'],
+    packages=find_packages(exclude=['tests']),
     platforms='any',
 
     install_requires=[
