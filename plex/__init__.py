@@ -7,5 +7,5 @@ __version__ = '0.6.2'
 
 try:
     from plex.client import Plex
-except Exception, ex:
+except Exception as ex:
     log.warn('Unable to import submodules - %s', ex)
