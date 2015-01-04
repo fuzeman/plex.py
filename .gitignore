@@ -4,3 +4,5 @@
 
 /plex.py.egg-info
 /virtualenv
+/build
+/dist
