@@ -1,4 +1,5 @@
 from plex import Plex
+from plex.interfaces.core.base import PARSER
 
 from tests.core.helpers import read
 import responses
@@ -20,4 +21,9 @@ def test_detail():
     )
 
     detail = Plex.detail()
-    assert detail is None
+
+    if PARSER == 'etree.HTMLParser':
+        assert detail is not None
+        assert detail.platform_version == u'6.2 (Build 9200)\xff\xff'
+    else:
+        assert detail is None
