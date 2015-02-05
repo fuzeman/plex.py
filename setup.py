@@ -12,7 +12,10 @@ setup(
     author_email='me@dgardiner.net',
 
     description='Python interface for the Plex Media Server API',
-    packages=find_packages(exclude=['tests']),
+    packages=find_packages(exclude=[
+        'examples',
+        'tests'
+    ]),
     platforms='any',
 
     install_requires=[
