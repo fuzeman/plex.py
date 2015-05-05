@@ -14,6 +14,9 @@ class Detail(Container):
     platform = Property
     platform_version = Property('platformVersion')
 
+    allow_camera_upload = Property('allowCameraUpload', [int, bool])
+    allow_channel_access = Property('allowChannelAccess', [int, bool])
+
     multiuser = Property(type=[int, bool])
     start_state = Property('startState')
     sync = Property(type=[int, bool])
