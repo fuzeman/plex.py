@@ -48,7 +48,6 @@ def test_sections_filter():
     assert items[0].agent == 'com.plexapp.agents.thetvdb'
 
 
-
 @responses.activate
 def test_section_all():
     responses.add(
