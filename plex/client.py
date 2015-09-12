@@ -36,20 +36,32 @@ class PlexClient(object):
         parts = path.strip('/').split('/')
 
         cur = self.__interfaces
+        parameters = []
 
         while parts and type(cur) is dict:
             key = parts.pop(0)
 
-            if key not in cur:
+            if key == '*':
+                key = None
+            elif key not in cur:
+                if None in cur:
+                    parameters.append(key)
+
+                    cur = cur[None]
+                    continue
+
                 return None
 
             cur = cur[key]
 
-        if type(cur) is dict:
+        while type(cur) is dict:
             cur = cur.get(None)
 
         if parts:
-            return InterfaceProxy(cur, parts)
+            parameters.extend(parts)
+
+        if parameters:
+            return InterfaceProxy(cur, parameters)
 
         return cur
 
