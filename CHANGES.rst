@@ -1,6 +1,24 @@
+0.7.0 (2015-09-12)
+------------------
+**Added**
+ - Support for client headers (:code:`Configuration.client()`, :code:`Configuration.device()` and :code:`Configuration.platform()`)
+ - Support for custom headers (:code:`Configuration.headers()`)
+ - Descriptors: :code:`Clip`
+ - Interfaces: :code:`Plex[':/plugins/<id>/prefs']`, :code:`Plex[':/timeline']`
+ - :code:`Detail` - Properties: :code:`allow_camera_upload`, :code:`allow_channel_access`, :code:`allow_sync`, :code:`certificate`
+ - :code:`Track` - Properties: :code:`view_count`
+ - :code:`Plex['library']` - Methods: :code:`unscrobble()`
+
+**Changed**
+ - Flatten titles in the :code:`SectionContainer.filter()` method
+
+**Fixed**
+ - Bug in the :code:`to_iterable()` helper method
+ - Boolean properties in the :code:`Detail` descriptor
+
 0.6.4 (2015-02-05)
 ------------------
-**Changes**
+**Changed**
  - Implemented some missing properties in :code:`Episode` and :code:`Detail` objects
  - Catch XML parsing errors and display error messages for debugging purposes
  - Use :code:`etree.HTMLParser` (if available)
