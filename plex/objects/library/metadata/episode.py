@@ -3,11 +3,12 @@ from plex.objects.library.metadata.season import Season
 from plex.objects.library.metadata.show import Show
 from plex.objects.library.metadata.base import Metadata
 from plex.objects.library.video import Video
+from plex.objects.mixins.playlist_item import PlaylistItemMixin
 from plex.objects.mixins.rate import RateMixin
 from plex.objects.mixins.scrobble import ScrobbleMixin
 
 
-class Episode(Video, Metadata, RateMixin, ScrobbleMixin):
+class Episode(Video, Metadata, PlaylistItemMixin, RateMixin, ScrobbleMixin):
     show = Property(resolver=lambda: Episode.construct_show)
     season = Property(resolver=lambda: Episode.construct_season)
 
