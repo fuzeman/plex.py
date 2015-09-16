@@ -15,7 +15,6 @@ class Episode(Video, Metadata, PlaylistItemMixin, RateMixin, ScrobbleMixin):
     index = Property(type=int)
 
     studio = Property
-    audience_rating = Property('audienceRating', float)
     content_rating = Property('contentRating')
 
     year = Property(type=int)

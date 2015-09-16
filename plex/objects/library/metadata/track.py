@@ -18,6 +18,9 @@ class Track(Directory, Metadata, PlaylistItemMixin, SessionMixin, ScrobbleMixin)
     view_offset = Property('viewOffset', type=int)
 
     duration = Property(type=int)
+    year = Property(type=int)
+
+    chapter_source = Property('chapterSource')
 
     @staticmethod
     def construct_artist(client, node):
@@ -27,6 +30,7 @@ class Track(Directory, Metadata, PlaylistItemMixin, SessionMixin, ScrobbleMixin)
 
             'title':        'grandparentTitle',
 
+            'art':          'grandparentArt',
             'thumb':        'grandparentThumb'
         }
 
