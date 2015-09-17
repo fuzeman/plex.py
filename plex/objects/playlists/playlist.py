@@ -46,7 +46,7 @@ class Playlist(Descriptor):
         )
 
     def remove(self, item_id):
-        return Plex['playlists/*/items'].add(
+        return Plex['playlists/*/items'].remove(
             self.rating_key,
 
             item_id=item_id
