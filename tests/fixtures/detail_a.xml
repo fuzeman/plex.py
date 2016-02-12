@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<MediaContainer size="14" friendlyName="Mock Server" multiuser="1" platform="Windows" platformVersion="6.2 (Build 9200)" requestParametersInCookie="1" version="0.9.9.16.555-50cd0c3">
+<MediaContainer size="14" friendlyName="Mock Server" multiuser="1" platform="Windows" platformVersion="6.2 (Build 9200)" requestParametersInCookie="1" version="0.9.9.16.555-50cd0c3" sync="0">
     <Directory count="1" key="butler" title="butler" />
     <Directory count="1" key="channels" title="channels" />
     <Directory count="1" key="clients" title="clients" />
