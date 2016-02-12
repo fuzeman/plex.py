@@ -18,7 +18,7 @@ class Season(Directory, Metadata):
     episode_count = Property('leafCount', int)
     viewed_episode_count = Property('viewedLeafCount', int)
 
-    view_count = Property('viewCount', type=int)
+    view_count = Property('viewCount', int)
 
     def children(self):
         return self.client['library/metadata'].children(self.rating_key)

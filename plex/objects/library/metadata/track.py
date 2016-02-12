@@ -15,8 +15,8 @@ class Track(Directory, Metadata, PlaylistItemMixin, RateMixin, SessionMixin, Scr
 
     index = Property(type=int)
 
-    view_count = Property('viewCount', type=int)
-    view_offset = Property('viewOffset', type=int)
+    view_count = Property('viewCount', int)
+    view_offset = Property('viewOffset', int)
 
     duration = Property(type=int)
     year = Property(type=int)
