@@ -42,7 +42,7 @@ class Property(object):
         for target_type in types:
             try:
                 result = target_type(result)
-            except Exception, ex:
+            except Exception as ex:
                 log.warn('Unable to cast value: %r, to type: %r - %s', result, target_type, ex, exc_info=True)
                 return None
 
