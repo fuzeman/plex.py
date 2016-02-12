@@ -1,3 +1,51 @@
+0.8.0 (2016-02-12)
+------------------
+**Added**
+ - Interfaces
+    - :code:`Plex['playlists']`
+    - :code:`Plex['playlists/*/items']`
+ - Methods
+    - :code:`Container`
+       - :code:`first()`
+    - :code:`Plex['library/metadata']`
+       - :code:`update()`
+ - Objects
+    - :code:`Playlist`
+    - :code:`PlaylistItemContainer`
+ - Properties
+    - :code:`Detail`
+       - :code:`allow_media_deletion`
+       - :code:`background_processing`
+       - :code:`companion_proxy`
+    - :code:`Episode`
+       - :code:`playlist_item_id`
+    - :code:`MediaContainer`
+       - :code:`leaf_count_added`
+       - :code:`leaf_count_requested`
+    - :code:`Metadata`
+       - :code:`audience_rating`
+       - :code:`audience_rating_image`
+       - :code:`rating_count`
+       - :code:`rating_image`
+       - :code:`source_icon`
+       - :code:`url`
+    - :code:`Movie`
+       - :code:`playlist_item_id`
+    - :code:`Stream`
+       - :code:`language`
+       - :code:`language_code`
+    - :code:`Track`
+       - :code:`chapter_source`
+       - :code:`playlist_item_id`
+       - :code:`rating`
+       - :code:`user_rating`
+       - :code:`year`
+    - :code:`TranscoderDetail`
+       - :code:`lyrics`
+       - :code:`photo`
+       - :code:`subtitles`
+       - :code:`video_remux_only`
+
 0.7.0 (2015-09-12)
 ------------------
 **Added**
