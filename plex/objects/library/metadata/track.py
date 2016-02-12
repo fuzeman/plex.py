@@ -4,11 +4,12 @@ from plex.objects.library.metadata.album import Album
 from plex.objects.library.metadata.artist import Artist
 from plex.objects.library.metadata.base import Metadata
 from plex.objects.mixins.playlist_item import PlaylistItemMixin
+from plex.objects.mixins.rate import RateMixin
 from plex.objects.mixins.scrobble import ScrobbleMixin
 from plex.objects.mixins.session import SessionMixin
 
 
-class Track(Directory, Metadata, PlaylistItemMixin, SessionMixin, ScrobbleMixin):
+class Track(Directory, Metadata, PlaylistItemMixin, RateMixin, SessionMixin, ScrobbleMixin):
     artist = Property(resolver=lambda: Track.construct_artist)
     album = Property(resolver=lambda: Track.construct_album)
 

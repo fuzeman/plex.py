@@ -58,11 +58,15 @@ class SeasonChildrenContainer(ChildrenContainer):
     @staticmethod
     def construct_show(client, node):
         attribute_map = {
+            'ratingKey'    : 'grandparentRatingKey',
+
             'title'        : 'grandparentTitle',
 
             'contentRating': 'grandparentContentRating',
             'studio'       : 'grandparentStudio',
-            'theme'        : 'grandparentTheme'
+
+            'theme'        : 'grandparentTheme',
+            'thumb'        : 'grandparentThumb'
         }
 
         return Show.construct(client, node, attribute_map, child=True)

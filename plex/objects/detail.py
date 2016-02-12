@@ -64,6 +64,7 @@ class TranscoderDetail(Descriptor):
 
     video_bitrates = Property('transcoderVideoBitrates')
     video_qualities = Property('transcoderVideoQualities')
+    video_remux_only = Property('transcoderVideoRemuxOnly', [int, bool])
     video_resolutions = Property('transcoderVideoResolutions')
 
     active_video_sessions = Property('transcoderActiveVideoSessions', int)
