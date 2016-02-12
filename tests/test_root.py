@@ -25,6 +25,21 @@ def test_detail():
 
 
 @responses.activate
+def test_booleans():
+    responses.add(
+        responses.GET, 'http://mock:32400',
+        body=read('fixtures/detail_a.xml'), status=200,
+        content_type='application/xml'
+    )
+
+    detail = Plex.detail()
+    assert detail is not None
+
+    assert detail.multiuser is True
+    assert detail.sync is False
+
+
+@responses.activate
 def test_version():
     responses.add(
         responses.GET, 'http://mock:32400',
