@@ -14,7 +14,5 @@ class Movie(Video, Metadata, PlaylistItemMixin, RateMixin, ScrobbleMixin):
     genres = Property(resolver=lambda: Genre.from_node)
     roles = Property(resolver=lambda: Role.from_node)
 
-    tagline = Property
-
     def __repr__(self):
         return '<Movie %r (%s)>' % (self.title, self.year)

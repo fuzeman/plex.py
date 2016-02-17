@@ -24,6 +24,7 @@ class Metadata(Descriptor):
 
     studio = Property
     summary = Property
+    tagline = Property
     year = Property(type=int)
 
     thumb = Property
