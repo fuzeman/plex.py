@@ -21,6 +21,7 @@ class Metadata(Descriptor):
     rating_image = Property('ratingImage')
 
     summary = Property
+    year = Property(type=int)
 
     thumb = Property
 
@@ -30,6 +31,7 @@ class Metadata(Descriptor):
 
     added_at = Property('addedAt', int)
     last_viewed_at = Property('lastViewedAt', int)
+    originally_available_at = Property('originallyAvailableAt')
 
     @staticmethod
     def construct_section(client, node):

@@ -15,9 +15,6 @@ class Show(Directory, Metadata, RateMixin):
     banner = Property
     theme = Property
 
-    year = Property(type=int)
-    originally_available_at = Property('originallyAvailableAt')
-
     season_count = Property('childCount', int)
 
     episode_count = Property('leafCount', int)

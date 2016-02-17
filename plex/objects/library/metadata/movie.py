@@ -17,9 +17,6 @@ class Movie(Video, Metadata, PlaylistItemMixin, RateMixin, ScrobbleMixin):
     studio = Property
     content_rating = Property('contentRating')
 
-    year = Property(type=int)
-    originally_available_at = Property('originallyAvailableAt')
-
     tagline = Property
 
     def __repr__(self):

@@ -17,9 +17,6 @@ class Episode(Video, Metadata, PlaylistItemMixin, RateMixin, ScrobbleMixin):
     studio = Property
     content_rating = Property('contentRating')
 
-    year = Property(type=int)
-    originally_available_at = Property('originallyAvailableAt')
-
     def __repr__(self):
         if self.show and self.season:
             return '<Episode %r - S%02dE%02d (%s)>' % (
