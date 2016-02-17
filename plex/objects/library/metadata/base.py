@@ -19,6 +19,7 @@ class Metadata(Descriptor):
 
     content_rating = Property('contentRating')
 
+    rating = Property(type=float)
     rating_count = Property('ratingCount')
     rating_image = Property('ratingImage')
 
