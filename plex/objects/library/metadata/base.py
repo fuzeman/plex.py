@@ -17,9 +17,12 @@ class Metadata(Descriptor):
     audience_rating = Property('audienceRating', float)
     audience_rating_image = Property('audienceRatingImage')
 
+    content_rating = Property('contentRating')
+
     rating_count = Property('ratingCount')
     rating_image = Property('ratingImage')
 
+    studio = Property
     summary = Property
     year = Property(type=int)
 

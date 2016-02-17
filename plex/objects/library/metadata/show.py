@@ -9,9 +9,6 @@ class Show(Directory, Metadata, RateMixin):
     index = Property(type=int)
     duration = Property(type=int)
 
-    studio = Property
-    content_rating = Property('contentRating')
-
     banner = Property
     theme = Property
 
