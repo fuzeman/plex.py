@@ -137,7 +137,7 @@ class Descriptor(Interface):
             setattr(obj, key, prop.value(cls, client, node_key, node, keys_used))
 
         # Ensure attributes were matched
-        if not keys_used:
+        if child and not keys_used:
             return [], None
 
         # Post-fill transformation
