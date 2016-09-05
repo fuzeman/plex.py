@@ -1,41 +1,52 @@
 from plex.objects.core.base import Property
+from plex.objects.directory import Directory
 from plex.objects.library.metadata.base import Metadata
-from plex.objects.library.metadata.photo import PhotoAlbum
-from plex.objects.library.video import Video
+from plex.objects.mixins.session import SessionMixin
 
 
-class Clip(Video, Metadata):
-    grandparent = Property(resolver=lambda: Clip.construct_grandparent)
-    parent = Property(resolver=lambda: Clip.construct_parent)
+class PhotoAlbum(Directory, Metadata):
+    index = Property(type=int)
 
-    extra_type = Property('extraType', int)
+    def __repr__(self):
+        return '<PhotoAlbum %r>' % self.title
+
+
+class Photo(Directory, Metadata, SessionMixin):
+    grandparent = Property(resolver=lambda: Photo.construct_grandparent)
+    parent = Property(resolver=lambda: Photo.construct_parent)
 
     index = Property(type=int)
 
     filename = Property
     device = Property
 
+    view_offset = Property('viewOffset', int)
+
+    @property
+    def album(self):
+        return self.parent
+
     def __repr__(self):
         if self.grandparent and self.parent:
-            return '<Clip %r - %r - %r>' % (
+            return '<Photo %r - %r - %r>' % (
                 self.grandparent.title,
                 self.parent.title,
                 self.title
             )
 
         if self.grandparent:
-            return '<Clip %r - %r>' % (
+            return '<Photo %r - %r>' % (
                 self.grandparent.title,
                 self.title
             )
 
         if self.parent:
-            return '<Clip %r - %r>' % (
+            return '<Photo %r - %r>' % (
                 self.parent.title,
                 self.title
             )
 
-        return '<Clip %r>' % self.title
+        return '<Photo %r>' % self.title
 
     @staticmethod
     def construct_grandparent(client, node):

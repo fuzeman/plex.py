@@ -13,12 +13,7 @@ class Episode(Video, Metadata, PlaylistItemMixin, RateMixin, ScrobbleMixin):
     season = Property(resolver=lambda: Episode.construct_season)
 
     index = Property(type=int)
-
-    studio = Property
-    content_rating = Property('contentRating')
-
-    year = Property(type=int)
-    originally_available_at = Property('originallyAvailableAt')
+    absolute_index = Property('absoluteIndex', int)
 
     def __repr__(self):
         if self.show and self.season:

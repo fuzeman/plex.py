@@ -1,8 +1,9 @@
-*.pyc
-
-/examples/cache
-
-/plex.py.egg-info
-/virtualenv
+/.idea
 /build
 /dist
+/examples/cache
+/plex.py.egg-info
+/virtualenv
+
+*.iml
+*.pyc

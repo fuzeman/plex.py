@@ -1,3 +1,68 @@
+0.9.0 (2016-09-06)
+------------------
+**Added**
+ - Interfaces
+    - :code:`Plex['status'].sessions()`
+       - Support for :code:`Photo` sessions
+    - :code:`Plex['library'].metadata()`
+       - Support for :code:`Photo` metadata objects
+ - Methods
+    - :code:`Season`
+       - :code:`rate(value)`
+ - Objects
+    - :code:`Photo`
+    - :code:`PhotoAlbum`
+ - Properties
+    - :code:`Clip`
+       - :code:`grandparent`
+       - :code:`parent`
+       - :code:`filename`
+       - :code:`device`
+    - :code:`Detail`
+       - :code:`allow_sharing`
+       - :code:`diagnostics`
+       - :code:`event_stream`
+       - :code:`hub_search`
+       - :code:`plugin_host`
+       - :code:`read_only_libraries`
+       - :code:`updater`
+       - :code:`owner_features`
+    - :code:`Episode`
+       - :code:`absolute_index`
+    - :code:`Metadata`
+       - :code:`title_sort_saved`
+       - :code:`content_rating`
+       - :code:`content_rating_age`
+       - :code:`rating`
+       - :code:`studio`
+       - :code:`tagline`
+       - :code:`year`
+       - :code:`deferred`
+       - :code:`created_at_accuracy`
+       - :code:`created_at_tzoffset`
+       - :code:`deleted_at`
+       - :code:`first_scan_added_at`
+       - :code:`originally_available_at`
+    - :code:`Playlist`
+       - :code:`rating_count`
+    - :code:`PlaylistItemContainer`
+       - :code:`rating_key`
+       - :code:`composite`
+       - :code:`playlist_type`
+    - :code:`Season`
+       - :code:`user_rating`
+    - :code:`Video`
+       - :code:`chapter_images_stale`
+
+**Changed**
+ - Improved logging of property parsing errors
+ - Properties
+    - :code:`Stream`
+       - :code:`level` type has been changed to string
+
+**Fixed**
+ - Exception would be raised with requests v2.11.0+ when no authentication token has been defined
+
 0.8.0 (2016-02-12)
 ------------------
 **Added**
