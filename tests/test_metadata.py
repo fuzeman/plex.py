@@ -18,10 +18,23 @@ def test_episode():
     container = Plex['library'].metadata(31)
     assert container is not None
 
+    # Validate container
     items = list(container)
     assert len(items) == 1
 
+    # - section
+    assert container.section.id == '26'
+    assert container.section.key == '26'
+    assert container.section.uuid == '4k48a112-3464-45f5-fg56-2b0e8b917629'
+    assert container.section.title == 'TV Shows'
+
+    # Validate episode
     episode = items[0]
+
+    # - section
+    assert episode.section.id == '26'
+    assert episode.section.key == '26'
+    assert episode.section.path == '/library/sections/26'
 
     # - index
     assert episode.index == 1
