@@ -60,6 +60,8 @@ class Episode(Video, Metadata, PlaylistItemMixin, RateMixin, ScrobbleMixin):
             'key':          'parentKey',
             'ratingKey':    'parentRatingKey',
 
+            'title':        'parentTitle',
+
             'thumb':        'parentThumb'
         }
 
