@@ -16,6 +16,7 @@ class Detail(Container):
 
     country_code = Property('countryCode')
     streaming_brain_version = Property('streamingBrainVersion', int)
+    streaming_brain_abr_version = Property('streamingBrainABRVersion', int)
 
     allow_camera_upload = Property('allowCameraUpload', (int, bool))
     allow_channel_access = Property('allowChannelAccess', (int, bool))
